@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test e2e --headed"
+    "test": "playwright test e2e "
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.35.1"
+  },
+  "dependencies": {
+    "playwright": "^1.35.1"
   }
 }
