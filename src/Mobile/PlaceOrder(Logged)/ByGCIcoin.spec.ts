@@ -9,11 +9,17 @@ test.use({ viewport: { width: 490, height: 896 } }),
     await page.fill('input[name="password"]', "Trieu123456789@");
     await page.click("(//button[contains(@class,'flex items-center')])[1]");
     await expect(page).toHaveURL("/");
-    await page.click("img[alt='Nail Polish']");
-    await page.getByRole("button", { name: "Buy Now" }).click({ delay: 200 });
-    await expect(page).toHaveURL("/cart");
+    await page
+      .getByRole("link", { name: "Price & Percentage Sort" })
+      .first()
+      .click();
     await page.waitForTimeout(3000);
+    await page.getByRole("button", { name: "Buy Now" }).click({ delay: 300 });
+    await page.waitForTimeout(3000);
+    await expect(page).toHaveURL("/cart");
+    await expect(page.getByText("Price Details")).toBeVisible();
     await page.getByRole("button", { name: "Proceed To Checkout" }).click();
+    await page.waitForTimeout(5000);
     await expect(page).toHaveURL(/.*checkout/);
     // await page.waitForTimeout(5000);
     // await page.getByRole('radio', { name: 'Card type Visa •••• •••• •••• 1111' }).click();

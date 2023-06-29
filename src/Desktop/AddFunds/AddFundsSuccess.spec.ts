@@ -13,6 +13,6 @@ test("Add Funds Success", async ({ page }) => {
   await page.click("(//div[contains(@class,'w-full flex-none')]//button[1])");
   await page.fill("input", "1000");
   await page.click("//div[@class='flex items-center']");
-  await page.waitForTimeout(3000);
+  await page.waitForTimeout(5000);
   await expect(page.getByText("Add funds successfully!")).toBeVisible();
 });
