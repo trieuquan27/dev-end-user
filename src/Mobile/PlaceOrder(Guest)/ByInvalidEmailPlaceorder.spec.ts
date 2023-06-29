@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 test.use({ viewport: { width: 490, height: 896 } }),
-  test("Mobile Place order by Visa Guest", async ({ page }) => {
+  test("Invalid Mobile Place order by Guest", async ({ page }) => {
     await page.goto("/");
     await expect(page).toHaveURL("/");
     await page.click("img[alt='Nail Polish']");
@@ -10,7 +10,7 @@ test.use({ viewport: { width: 490, height: 896 } }),
     await page.getByRole("button", { name: "Proceed To Checkout" }).click();
     await expect(page).toHaveURL(/.*checkout/);
     await page.waitForTimeout(6000);
-    await page.fill('//input[@placeholder="Enter email"]', "d@a.com");
+    await page.fill('//input[@placeholder="Enter email"]', "d@d+11.com");
     await page.click("//button[text()='Add']");
     await page.fill('input[name="firstName"]', "Test");
     await page.fill('input[name="lastName"]', "Abc");
@@ -22,13 +22,9 @@ test.use({ viewport: { width: 490, height: 896 } }),
     await page.waitForTimeout(3000);
     await page.click("//button[normalize-space()='Add Card']");
     await page.waitForTimeout(3000);
-    await page.getByRole("button", { name: "Place Order" }).dblclick();
+    await page.getByRole("button", { name: "Place Order" }).click();
     await page.waitForTimeout(3000);
-    await expect(page.getByText("Order placed successfully")).toBeVisible();
-    await expect(page).toHaveURL(/.*thank-you/);
-    await page.waitForTimeout(3000);
-    await page.click("//button[normalize-space()='View Order']");
-    await expect(page).toHaveURL(/.*order/);
-    await expect(page.getByText("Create an Account")).toBeVisible();
-    page.close();
+    await expect(
+      page.getByText("This value is not a valid email address.")
+    ).toBeVisible();
   });

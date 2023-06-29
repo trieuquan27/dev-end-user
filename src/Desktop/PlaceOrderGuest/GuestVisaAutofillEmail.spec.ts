@@ -40,4 +40,5 @@ test("Guest using visa", async ({ browser }) => {
   await expect(page.getByPlaceholder("Enter your email")).toHaveValue(
     "b@b.com"
   );
+  page.close();
 });

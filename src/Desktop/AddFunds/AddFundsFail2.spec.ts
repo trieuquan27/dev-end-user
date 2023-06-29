@@ -14,4 +14,5 @@ test("Add Funds Must be a number", async ({ page }) => {
   await page.click("(//div[contains(@class,'w-full flex-none')]//button[1])");
   await page.fill("input", "");
   await expect(page.getByText("Must be a number")).toBeVisible();
+  page.close();
 });

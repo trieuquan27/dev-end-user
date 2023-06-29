@@ -9,4 +9,5 @@ test.use({ viewport: { width: 490, height: 896 } }),
     await page.click("(//button[contains(@class,'flex items-center')])[1]");
     await page.waitForTimeout(3000);
     await expect(page.getByText("Password is required")).toBeVisible();
+    page.close();
   });

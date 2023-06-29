@@ -33,4 +33,5 @@ test.use({ viewport: { width: 490, height: 896 } }),
     await page.click("//a[contains(text(),'View Order')]");
     await expect(page).toHaveURL(/.*order/);
     await expect(page.getByText("Receipt Details")).toBeVisible();
+    page.close();
   });

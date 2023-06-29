@@ -9,4 +9,5 @@ test.use({ viewport: { width: 490, height: 896 } }),
     await page.waitForTimeout(3000);
     await expect(page.getByText("Password is required")).toBeVisible();
     await expect(page.getByText("Email address is required")).toBeVisible();
+    page.close();
   });

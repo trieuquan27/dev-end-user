@@ -45,7 +45,7 @@ test.use({ viewport: { width: 490, height: 896 } }),
     );
     if (response.status() === 200) {
       console.log("result success", response.url());
-      await page.waitForTimeout(3000);
+      await page.waitForTimeout(5000);
       await expect(page.getByText("Order placed successfully")).toBeVisible();
       await page.waitForTimeout(3000);
       await expect(page).toHaveURL(/.*thank-you/);
@@ -53,9 +53,10 @@ test.use({ viewport: { width: 490, height: 896 } }),
       await expect(page).toHaveURL(/.*order/);
       await expect(page.getByText("Receipt Details")).toBeVisible();
     } else {
+      await expect(page.getByText("Payment Failed")).toBeVisible();
       console.log("result failed", response.url());
     }
-
+    page.close();
     // const responseAPICreateCart = await page.waitForResponse(
     //   async (response) =>
     //     await isFinished({ response: response, path: "CreateCart" })

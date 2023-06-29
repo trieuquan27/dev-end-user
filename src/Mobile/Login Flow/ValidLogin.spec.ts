@@ -9,4 +9,5 @@ test.use({ viewport: { width: 490, height: 896 } }),
     await page.fill('input[name="password"]', "Trieu123456789@");
     await page.click("(//button[contains(@class,'flex items-center')])[1]");
     await expect(page).toHaveURL("/");
+    page.close();
   });

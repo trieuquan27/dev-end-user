@@ -16,4 +16,5 @@ test("Add Funds Should more than zero", async ({ page }) => {
   await page.click("(//div[contains(@class,'w-full flex-none')]//button[1])");
   await page.fill("input", "0000");
   await expect(page.getByText("Amount should more than zero")).toBeVisible();
+  page.close();
 });

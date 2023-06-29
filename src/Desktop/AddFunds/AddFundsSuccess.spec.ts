@@ -15,4 +15,5 @@ test("Add Funds Success", async ({ page }) => {
   await page.click("//div[@class='flex items-center']");
   await page.waitForTimeout(5000);
   await expect(page.getByText("Add funds successfully!")).toBeVisible();
+  page.close();
 });
