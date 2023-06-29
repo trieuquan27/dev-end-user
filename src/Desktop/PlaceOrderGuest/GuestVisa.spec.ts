@@ -7,7 +7,7 @@ test("Guest using visa", async ({ browser }) => {
   await page.goto("/");
   await expect(page).toHaveURL("/");
   await page.click("img[alt='Nail Polish']");
-  await page.getByRole("button", { name: "Buy Now" }).click();
+  await page.getByRole("button", { name: "Buy Now" }).dblclick();
   await page.waitForTimeout(3000);
   await expect(page).toHaveURL("/cart");
   await page.getByRole("button", { name: "Proceed To Checkout" }).click();
