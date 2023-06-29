@@ -57,13 +57,4 @@ test.use({ viewport: { width: 490, height: 896 } }),
       console.log("result failed", response.url());
     }
     page.close();
-    // const responseAPICreateCart = await page.waitForResponse(
-    //   async (response) =>
-    //     await isFinished({ response: response, path: "CreateCart" })
-    // );
-    // if (response.status() === 200) {
-    //   console.log("result success", response.url());
-    // } else {
-    //   console.log("result failed", response.url());
-    // }
   });
