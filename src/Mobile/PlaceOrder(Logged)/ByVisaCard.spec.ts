@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { isFinished } from "../../common/getapi";
+import { getApi } from "../../common/getapi";
 
 test.use({ viewport: { width: 490, height: 896 } }),
   test("Mobile Place order by Visa card", async ({ page, context }) => {
@@ -41,7 +41,7 @@ test.use({ viewport: { width: 490, height: 896 } }),
 
     const response = await page.waitForResponse(
       async (response) =>
-        await isFinished({ response: response, path: "/xml/v1/request.api" })
+        await getApi({ response: response, path: "/xml/v1/request.api" })
     );
     if (response.status() === 200) {
       console.log("result success", response.url());

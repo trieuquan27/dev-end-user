@@ -1,4 +1,4 @@
-export async function isFinished({
+export async function getApi({
   response,
   path,
 }: {

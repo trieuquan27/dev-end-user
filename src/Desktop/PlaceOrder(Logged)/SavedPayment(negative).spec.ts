@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { isFinished } from "../../common/getapi";
+import { getApi } from "../../common/getapi";
 
 test.use({ viewport: { width: 1257, height: 961 } }),
   test("view order detail after placing order successfully by SAVED JCB", async ({
@@ -28,7 +28,7 @@ test.use({ viewport: { width: 1257, height: 961 } }),
     await expect(page).toHaveURL(/.*checkout/);
     const response = await page.waitForResponse(
       async (response) =>
-        await isFinished({
+        await getApi({
           response: response,
           path: "https://dev.gocheckin.io/graphql?CustomerPaymentMethod",
         })
