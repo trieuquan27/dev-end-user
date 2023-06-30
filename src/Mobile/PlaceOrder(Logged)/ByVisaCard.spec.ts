@@ -43,7 +43,6 @@ test.use({ viewport: { width: 490, height: 896 } }),
       const checkBox = page.getByRole("button", { name: "checkbox" });
       // console.log(checkBox);
       expect(checkBox.isChecked).toBeTruthy();
-      await page.waitForTimeout(3000);
       await page.getByRole("button", { name: "Place Order" }).dblclick();
       expect(await page.getByText("Something went wrong").count()).toEqual(0);
       expect(
