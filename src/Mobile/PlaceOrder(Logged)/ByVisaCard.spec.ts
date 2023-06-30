@@ -15,12 +15,12 @@ test.use({ viewport: { width: 490, height: 896 } }),
     const storageState = await context.storageState();
     console.log(storageState.origins[0].localStorage);
 
-    await page.click("img[alt='Nail Polish']");
+    await page.click("img[alt='Nail Polish']", { delay: 500 });
     // await page.waitForTimeout(3000);
     await page.getByRole("button", { name: "Buy Now" }).click({ delay: 600 });
     await page.waitForTimeout(5000);
     await expect(page).toHaveURL("/cart");
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(3000);
     await page.getByRole("button", { name: "Proceed To Checkout" }).click();
     await expect(page).toHaveURL(/.*checkout/);
     await page.click("//button[text()='Add']");
@@ -33,12 +33,6 @@ test.use({ viewport: { width: 490, height: 896 } }),
     await page.fill('input[name="zipcode"]', "11113");
     await page.waitForTimeout(3000);
     await page.getByRole("button", { name: "Add Card" }).click();
-    await page.waitForTimeout(5000);
-
-    await page
-      .getByRole("button", { name: "Place Order" })
-      .click({ delay: 500 });
-
     const response = await page.waitForResponse(
       async (response) =>
         await getApi({ response: response, path: "/xml/v1/request.api" })
@@ -46,7 +40,21 @@ test.use({ viewport: { width: 490, height: 896 } }),
     if (response.status() === 200) {
       console.log("result success", response.url());
       await page.waitForTimeout(5000);
-      await expect(page.getByText("Order placed successfully")).toBeVisible();
+      const checkBox = page.getByRole("button", { name: "checkbox" });
+      // console.log(checkBox);
+      expect(checkBox.isChecked).toBeTruthy();
+      await page.waitForTimeout(3000);
+      await page.getByRole("button", { name: "Place Order" }).dblclick();
+      expect(await page.getByText("Something went wrong").count()).toEqual(0);
+      expect(
+        await page
+          .getByText("Payment failed. Please check your payment information.")
+          .count()
+      ).toEqual(0);
+      expect(await page.getByText("Cart Must have a payment.").count()).toEqual(
+        0
+      );
+      expect(page.getByText("Order placed successfully")).toBeVisible();
       await page.waitForTimeout(3000);
       await expect(page).toHaveURL(/.*thank-you/);
       await page.click("//a[contains(text(),'View Order')]");
@@ -56,5 +64,6 @@ test.use({ viewport: { width: 490, height: 896 } }),
       await expect(page.getByText("Payment Failed")).toBeVisible();
       console.log("result failed", response.url());
     }
+
     page.close();
   });
