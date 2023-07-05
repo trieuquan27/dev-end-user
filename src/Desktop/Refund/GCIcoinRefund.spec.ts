@@ -2,10 +2,10 @@ import { expect, test } from "@playwright/test";
 
 test.use({ viewport: { width: 1920, height: 961 } });
 
-test("GCI coin refund", async ({ browser }) => {
+test("GCI coin refund", async ({ page }) => {
   test.setTimeout(60000);
-  const context = await browser.newContext();
-  const page = await context.newPage();
+  // const context = await browser.newContext();
+  // const page = await context.newPage();
   await page.goto("/");
 
   await page
@@ -13,9 +13,7 @@ test("GCI coin refund", async ({ browser }) => {
     .filter({ hasText: /^HomeSell on Go Checkin DealsGet the AppSign In$/ })
     .getByRole("button", { name: "Sign In" })
     .click();
-  //await page.getByPlaceholder('Enter your phone/email').click();
   await page.getByPlaceholder("Enter your email").fill("a@a.com");
-  //await page.getByPlaceholder('Enter your phone').press('Tab');
   await page.getByPlaceholder("Enter your password").fill("Trieu123456789@");
   await page.getByRole("button", { name: "Sign In" }).click();
   await expect(page).toHaveURL("/");
