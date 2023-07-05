@@ -1,5 +1,9 @@
 import { expect, test } from "@playwright/test";
-import { randomFirstName, randomLastName } from "../../common/randomname";
+import {
+  randomAddress,
+  randomFirstName,
+  randomLastName,
+} from "../../common/randomname";
 import { randomCVV, randomZipCode } from "../../common/randomnumber";
 
 test.use({ viewport: { width: 1257, height: 961 } }),
@@ -31,7 +35,7 @@ test.use({ viewport: { width: 1257, height: 961 } }),
     await page.fill('input[name="cardNumber"]', "5555555555554444");
     await page.fill('input[name="expireDate"]', "01/25");
     await page.fill('input[name="cvv"]', `${randomCVV}`);
-    await page.fill('input[name="address"]', "623");
+    await page.fill('input[name="address"]', `${randomAddress}`);
     await page.fill('input[name="zipcode"]', `${randomZipCode}`);
     await page.waitForTimeout(3000);
     await page.getByRole("button", { name: "Add Card" }).click();
