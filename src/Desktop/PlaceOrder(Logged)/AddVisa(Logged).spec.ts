@@ -3,6 +3,7 @@ import { getApi } from "../../common/getapi";
 import { randomCVV, randomZipCode } from "../../common/randomnumber";
 import { randomFirstName } from "../../common/randomname";
 import { randomLastName } from "../../common/randomname";
+import { userName3 } from "../../common/AccountList";
 
 test.use({ viewport: { width: 1920, height: 961 } });
 
@@ -17,8 +18,11 @@ test("view order detail after placing order successfully by visa", async ({
     .filter({ hasText: /^HomeSell on Go Checkin DealsGet the AppSign In$/ })
     .getByRole("button", { name: "Sign In" })
     .click();
-  await page.getByPlaceholder("Enter your email").fill("a@a78.com");
-  await page.getByPlaceholder("Enter your password").fill("Trieu123456789@");
+  // await page.getByPlaceholder("Enter your email").fill("a@a78.com");
+  await page.getByPlaceholder("Enter your email").fill(`${userName3.Name}`);
+  await page
+    .getByPlaceholder("Enter your password")
+    .fill(`${userName3.Password}`);
   await page.getByRole("button", { name: "Sign In" }).click();
   await expect(page).toHaveURL("/");
   const storageState = await context.storageState();

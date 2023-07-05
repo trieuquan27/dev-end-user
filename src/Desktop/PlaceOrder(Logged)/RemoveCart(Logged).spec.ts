@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { userName } from "../../common/AccountList";
 
 test("Remove Cart Logged Case", async ({ browser }) => {
   const context = await browser.newContext();
@@ -9,8 +10,10 @@ test("Remove Cart Logged Case", async ({ browser }) => {
     .filter({ hasText: /^HomeSell on Go Checkin DealsGet the AppSign In$/ })
     .getByRole("button", { name: "Sign In" })
     .click();
-  await page.getByPlaceholder("Enter your email").fill("a@a8.com");
-  await page.getByPlaceholder("Enter your password").fill("123456");
+  await page.getByPlaceholder("Enter your email").fill(`${userName.Name}`);
+  await page
+    .getByPlaceholder("Enter your password")
+    .fill(`${userName.Password}`);
   await page.getByRole("button", { name: "Sign In" }).click();
   await expect(page).toHaveURL("/");
   await page.click("(//img[@class='object-cover'])[1]");
@@ -21,4 +24,5 @@ test("Remove Cart Logged Case", async ({ browser }) => {
   await expect(
     page.getByText("Please add deals to your shopping cart")
   ).toBeVisible();
+  page.close();
 });

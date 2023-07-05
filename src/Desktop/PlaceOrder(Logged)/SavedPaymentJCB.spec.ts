@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { getApi } from "../../common/getapi";
+import { userName4 } from "../../common/AccountList";
 
 test.use({ viewport: { width: 1257, height: 961 } }),
   test("view order detial after placing order successfully by mastercard", async ({
@@ -14,8 +15,11 @@ test.use({ viewport: { width: 1257, height: 961 } }),
       .filter({ hasText: /^HomeSell on Go Checkin DealsGet the AppSign In$/ })
       .getByRole("button", { name: "Sign In" })
       .click();
-    await page.getByPlaceholder("Enter your email").fill("a@a88.com");
-    await page.getByPlaceholder("Enter your password").fill("Trieu123456789@");
+    // await page.getByPlaceholder("Enter your email").fill("a@a88.com");
+    await page.getByPlaceholder("Enter your email").fill(`${userName4.Name}`);
+    await page
+      .getByPlaceholder("Enter your password")
+      .fill(`${userName4.Password}`);
     await page.getByRole("button", { name: "Sign In" }).click();
     await expect(page).toHaveURL("/");
     await page.click("(//img[@class='object-cover'])[1]");

@@ -1,12 +1,15 @@
 import { expect, test } from "@playwright/test";
+import { userName4 } from "../../common/AccountList";
+
 test.use({ viewport: { width: 490, height: 896 } }),
   test("Mobile Place order by Master Card", async ({ page, context }) => {
     await page.goto("/");
     await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
     await page.click("(//span[contains(@class,'flex items-center')])[3]");
     await expect(page).toHaveURL("/signin");
-    await page.fill('input[name="username"]', "a@a88.com");
-    await page.fill('input[name="password"]', "Trieu123456789@");
+    // await page.fill('input[name="username"]', "a@a88.com");
+    await page.fill('input[name="username"]', `${userName4.Name}`);
+    await page.fill('input[name="password"]', `${userName4.Password}`);
     await page.click("(//button[contains(@class,'flex items-center')])[1]");
     await expect(page).toHaveURL("/");
 

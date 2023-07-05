@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { getApi } from "../../common/getapi";
+import { userName6 } from "../../common/AccountList";
 
 test.use({ viewport: { width: 490, height: 896 } }),
   test("Mobile Place order by Visa card", async ({ page, context }) => {
@@ -7,8 +8,9 @@ test.use({ viewport: { width: 490, height: 896 } }),
     await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
     await page.click("(//span[contains(@class,'flex items-center')])[3]");
     await expect(page).toHaveURL("/signin");
-    await page.fill('input[name="username"]', "a@a0.com");
-    await page.fill('input[name="password"]', "123456");
+    // await page.fill('input[name="username"]', "a@a0.com");
+    await page.fill('input[name="username"]', `${userName6.Name}`);
+    await page.fill('input[name="password"]', `${userName6.Password}`);
     await page.click("(//button[contains(@class,'flex items-center')])[1]");
     await expect(page).toHaveURL("/");
 

@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { userName } from "../../common/AccountList";
 
 test.use({ viewport: { width: 1920, height: 961 } });
 
@@ -13,8 +14,10 @@ test("GCI coin refund", async ({ page }) => {
     .filter({ hasText: /^HomeSell on Go Checkin DealsGet the AppSign In$/ })
     .getByRole("button", { name: "Sign In" })
     .click();
-  await page.getByPlaceholder("Enter your email").fill("a@a.com");
-  await page.getByPlaceholder("Enter your password").fill("Trieu123456789@");
+  await page.getByPlaceholder("Enter your email").fill(`${userName}`);
+  await page
+    .getByPlaceholder("Enter your password")
+    .fill(`${userName.Password}`);
   await page.getByRole("button", { name: "Sign In" }).click();
   await expect(page).toHaveURL("/");
   await page.click("(//button[contains(@class,'flex items-center')])[1]");

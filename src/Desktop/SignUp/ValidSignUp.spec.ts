@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { makeEmail } from "../../common/randomemail";
+import { randomEmail } from "../../common/randomemail";
 import { emailPwd } from "../../common/randompwd";
 
 test("Valid Signup", async ({ page }) => {
@@ -9,7 +9,7 @@ test("Valid Signup", async ({ page }) => {
   await expect(page).toHaveURL("/signin");
   await page.getByRole("link", { name: "Sign Up" }).click();
   await page.waitForTimeout(3000);
-  await page.getByPlaceholder("Enter your email").fill(makeEmail());
+  await page.getByPlaceholder("Enter your email").fill(randomEmail);
   const enterPwd = page.getByPlaceholder("Enter your Password").first();
   await enterPwd.fill(emailPwd);
   await page.getByPlaceholder("Re-Enter your Password").fill(emailPwd);
