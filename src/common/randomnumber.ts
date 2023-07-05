@@ -10,4 +10,5 @@ function generate(length) {
   return result;
 }
 export var randomCVV = generate(3);
+export var randomZipCode = generate(4);
 // console.log(randomCVV);
