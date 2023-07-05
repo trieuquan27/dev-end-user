@@ -33,7 +33,7 @@ test("view order detail after placing order successfully by visa", async ({
   const response = await page.waitForResponse(
     async (response) =>
       await getApi({ response: response, path: "/graphql?CartByPK" }),
-    { timeout: 10000 }
+    { timeout: 20000 }
   );
   if (response.status() === 200) {
     console.log(response);

@@ -38,7 +38,6 @@ test.use({ viewport: { width: 490, height: 896 } }),
     await page
       .getByRole("button", { name: "Place Order" })
       .click({ delay: 500 });
-    await page.waitForTimeout(3000);
     await expect(page.getByText("Order placed successfully")).toBeVisible();
     await expect(page).toHaveURL(/.*thank-you/);
     await page.waitForTimeout(3000);

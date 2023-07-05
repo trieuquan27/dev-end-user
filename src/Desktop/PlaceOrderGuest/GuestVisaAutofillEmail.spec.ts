@@ -40,6 +40,7 @@ test("Guest using visa", async ({ browser }) => {
       .count()
   ).toEqual(0);
   expect(await page.getByText("Cart Must have a payment.").count()).toEqual(0);
+  await page.waitForTimeout(3000);
   await expect(page).toHaveURL(/.*thank-you/);
   // await page.click("//a[contains(text(),'View Order')]");
   await expect(page).toHaveURL(/.*order/);

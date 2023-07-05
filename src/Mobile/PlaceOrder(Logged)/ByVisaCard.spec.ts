@@ -1,6 +1,12 @@
 import { expect, test } from "@playwright/test";
 import { getApi } from "../../common/getapi";
 import { userName6 } from "../../common/AccountList";
+import {
+  randomAddress,
+  randomFirstName,
+  randomLastName,
+} from "../../common/randomname";
+import { randomCVV, randomZipCode } from "../../common/randomnumber";
 
 test.use({ viewport: { width: 490, height: 896 } }),
   test("Mobile Place order by Visa card", async ({ page, context }) => {
@@ -13,10 +19,8 @@ test.use({ viewport: { width: 490, height: 896 } }),
     await page.fill('input[name="password"]', `${userName6.Password}`);
     await page.click("(//button[contains(@class,'flex items-center')])[1]");
     await expect(page).toHaveURL("/");
-
     const storageState = await context.storageState();
     console.log(storageState.origins[0].localStorage);
-
     await page.click("(//img[@class='object-cover'])[1]", { delay: 500 });
     await page.getByRole("button", { name: "Buy Now" }).click({ delay: 600 });
     await page.waitForTimeout(5000);
@@ -25,13 +29,13 @@ test.use({ viewport: { width: 490, height: 896 } }),
     await page.getByRole("button", { name: "Proceed To Checkout" }).click();
     await expect(page).toHaveURL(/.*checkout/);
     await page.click("//button[text()='Add']");
-    await page.fill('input[name="firstName"]', "Test");
-    await page.fill('input[name="lastName"]', "Abc");
+    await page.fill('input[name="firstName"]', `${randomFirstName}`);
+    await page.fill('input[name="lastName"]', `${randomLastName}`);
     await page.fill('input[name="cardNumber"]', "4242424242424242");
     await page.fill('input[name="expireDate"]', "10/27");
-    await page.fill('input[name="cvv"]', "456");
-    await page.fill('input[name="address"]', "433");
-    await page.fill('input[name="zipcode"]', "11113");
+    await page.fill('input[name="cvv"]', `${randomCVV}`);
+    await page.fill('input[name="address"]', `${randomAddress}`);
+    await page.fill('input[name="zipcode"]', `${randomZipCode}`);
     await page.waitForTimeout(3000);
     await page.getByRole("button", { name: "Add Card" }).click();
     const response = await page.waitForResponse(

@@ -23,8 +23,8 @@ test.use({ viewport: { width: 490, height: 896 } }),
     await page.click("//button[normalize-space()='Add Card']");
     await page.waitForTimeout(3000);
     await page.getByRole("button", { name: "Place Order" }).dblclick();
-    await page.waitForTimeout(3000);
     await expect(page.getByText("Order placed successfully")).toBeVisible();
+    await page.waitForTimeout(3000);
     await expect(page).toHaveURL(/.*thank-you/);
     await page.waitForTimeout(3000);
     await page.click("//button[normalize-space()='View Order']");
