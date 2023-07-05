@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { getApi } from "../../common/getapi";
-import { randomCVV } from "../../common/randomnumber";
+import { randomCVV, randomZipCode } from "../../common/randomnumber";
 import { randomFirstName } from "../../common/randomname";
 import { randomLastName } from "../../common/randomname";
 
@@ -43,7 +43,7 @@ test("view order detail after placing order successfully by visa", async ({
     await page.fill('input[name="expireDate"]', "01/26");
     await page.fill('input[name="cvv"]', `${randomCVV}`);
     await page.fill('input[name="address"]', `${randomCVV}`);
-    await page.fill('input[name="zipcode"]', "123");
+    await page.fill('input[name="zipcode"]', `${randomZipCode}`);
     await page.waitForTimeout(3000);
     await page.getByRole("button", { name: "Add Card" }).click();
     await page.waitForTimeout(3000);

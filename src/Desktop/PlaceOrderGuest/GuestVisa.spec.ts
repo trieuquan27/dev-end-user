@@ -1,4 +1,10 @@
 import { expect, test } from "@playwright/test";
+import {
+  randomAddress,
+  randomFirstName,
+  randomLastName,
+} from "../../common/randomname";
+import { randomCVV, randomZipCode } from "../../common/randomnumber";
 
 test("Guest using visa", async ({ browser }) => {
   const context = await browser.newContext();
@@ -15,13 +21,13 @@ test("Guest using visa", async ({ browser }) => {
   await page.click("input[placeholder='Enter email']");
   await page.fill("input[placeholder='Enter email']", "v@v.com");
   await page.click("//button[text()='Add']");
-  await page.fill('input[name="firstName"]', "Test");
-  await page.fill('input[name="lastName"]', "Abc");
+  await page.fill('input[name="firstName"]', `${randomFirstName}`);
+  await page.fill('input[name="lastName"]', `${randomLastName}`);
   await page.fill('input[name="cardNumber"]', "4242424242424242");
   await page.fill('input[name="expireDate"]', "01/26");
-  await page.fill('input[name="cvv"]', "123");
-  await page.fill('input[name="address"]', "bbaaaaaaaaaaaaaaaaaaaaaaaaaa");
-  await page.fill('input[name="zipcode"]', "139");
+  await page.fill('input[name="cvv"]', `${randomCVV}`);
+  await page.fill('input[name="address"]', `${randomAddress}`);
+  await page.fill('input[name="zipcode"]', `${randomZipCode}`);
   await page.waitForTimeout(3000);
   await page.getByRole("button", { name: "Add Card" }).click();
   await page.waitForTimeout(5000);
@@ -29,9 +35,7 @@ test("Guest using visa", async ({ browser }) => {
   // console.log(checkBox);
   expect(checkBox.isChecked).toBeTruthy();
   await page.waitForTimeout(3000);
-  await page
-    .getByRole("button", { name: "Place Order" })
-    .dblclick({ delay: 200 });
+  await page.getByRole("button", { name: "Place Order" }).dblclick();
   expect(await page.getByText("Something went wrong").count()).toEqual(0);
   expect(
     await page
@@ -39,7 +43,7 @@ test("Guest using visa", async ({ browser }) => {
       .count()
   ).toEqual(0);
   expect(await page.getByText("Cart Must have a payment.").count()).toEqual(0);
-  expect(await page.getByText("Order placed successfully").count()).toEqual(1);
+  expect(await page.getByText("Order placed successfully")).toBeVisible();
   await expect(page).toHaveURL(/.*thank-you/);
   // await page.click("//a[contains(text(),'View Order')]");
   await expect(page).toHaveURL(/.*order/);
