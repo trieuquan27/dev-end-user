@@ -1,4 +1,4 @@
-export function makeEmail() {
+function makeEmail() {
   var strValues = "abcdefg12345";
   var strEmail = "";
   var strTmp;
@@ -15,3 +15,6 @@ export function makeEmail() {
   strEmail = strEmail + ".com";
   return strEmail;
 }
+
+export var randomEmail = makeEmail();
+// console.log(randomEmail);
