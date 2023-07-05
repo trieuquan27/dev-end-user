@@ -31,7 +31,7 @@ test.use({ viewport: { width: 1257, height: 961 } }),
     await page
       .getByRole("radio", { name: "Card type JCB •••• •••• •••• 5841" })
       .click();
-    await page.waitForTimeout(6000);
+
     await page.waitForTimeout(5000);
     const checkBox = page.getByRole("button", { name: "checkbox" });
     // console.log(checkBox);

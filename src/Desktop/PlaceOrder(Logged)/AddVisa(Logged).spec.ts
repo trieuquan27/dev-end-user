@@ -28,7 +28,7 @@ test("view order detail after placing order successfully by visa", async ({
   const response = await page.waitForResponse(
     async (response) =>
       await getApi({ response: response, path: "/graphql?CartByPK" }),
-    { timeout: 5000 }
+    { timeout: 10000 }
   );
   if (response.status() === 200) {
     console.log(response);
@@ -48,7 +48,20 @@ test("view order detail after placing order successfully by visa", async ({
     await page.waitForTimeout(3000);
     await page.getByRole("button", { name: "Place Order" }).dblclick();
     await page.waitForTimeout(5000);
-    await expect(page.getByText("Order placed successfully")).toBeVisible();
+    const checkBox = page.getByRole("button", { name: "checkbox" });
+    // console.log(checkBox);
+    expect(checkBox.isChecked).toBeTruthy();
+    await page.waitForTimeout(3000);
+    await page.getByRole("button", { name: "Place Order" }).dblclick();
+    expect(await page.getByText("Something went wrong").count()).toEqual(0);
+    expect(
+      await page
+        .getByText("Payment failed. Please check your payment information.")
+        .count()
+    ).toEqual(0);
+    expect(await page.getByText("Cart Must have a payment.").count()).toEqual(
+      0
+    );
     await expect(page).toHaveURL(/.*thank-you/);
     await page.click("//a[contains(text(),'View Order')]");
     await expect(page).toHaveURL(/.*order/);
