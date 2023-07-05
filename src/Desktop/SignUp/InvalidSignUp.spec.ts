@@ -9,7 +9,7 @@ test("Invalid Signup", async ({ page }) => {
   await page.getByRole("link", { name: "Sign Up" }).click();
   await page.waitForTimeout(3000);
   await page.getByPlaceholder("Enter your email").fill(makeEmail());
-
+  // Get sign-up password fill
   const enterPwd = page.getByPlaceholder("Enter your Password").first();
   await enterPwd.fill(invalidString);
   await page.getByPlaceholder("Re-Enter your Password").fill(invalidString);
