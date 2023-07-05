@@ -55,7 +55,7 @@ test("view order detail after placing order successfully by visa", async ({
     const checkBox = page.getByRole("button", { name: "checkbox" });
     // console.log(checkBox);
     expect(checkBox.isChecked).toBeTruthy();
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(3000);
     await page.getByRole("button", { name: "Place Order" }).click();
     expect(await page.getByText("Something went wrong").count()).toEqual(0);
     expect(
