@@ -21,7 +21,7 @@ test.use({ viewport: { width: 1257, height: 961 } }),
       .filter({ hasText: /^HomeSell on Go Checkin DealsGet the AppSign In$/ })
       .getByRole("button", { name: "Sign In" })
       .click();
-    // await page.getByPlaceholder("Enter your email").fill("a@a4.com");ßß
+    // await page.getByPlaceholder("Enter your email").fill("a@a4.com");
     await page.getByPlaceholder("Enter your email").fill(`${userName2.Name}`);
     await page
       .getByPlaceholder("Enter your password")
