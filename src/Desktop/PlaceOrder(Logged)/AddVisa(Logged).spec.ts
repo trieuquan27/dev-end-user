@@ -4,6 +4,7 @@ import { randomCVV, randomZipCode } from "../../common/randomnumber";
 import { randomFirstName } from "../../common/randomname";
 import { randomLastName } from "../../common/randomname";
 import { userName3 } from "../../common/AccountList";
+import { credit } from "../../common/CreditCard";
 
 test.use({ viewport: { width: 1920, height: 961 } });
 
@@ -43,7 +44,7 @@ test("view order detail after placing order successfully by visa", async ({
     await page.click("//button[text()='Add']");
     await page.fill('input[name="firstName"]', `${randomFirstName}`);
     await page.fill('input[name="lastName"]', `${randomLastName}`);
-    await page.fill('input[name="cardNumber"]', "4111111111111111");
+    await page.fill('input[name="cardNumber"]', `${credit.visa2}`);
     await page.fill('input[name="expireDate"]', "01/26");
     await page.fill('input[name="cvv"]', `${randomCVV}`);
     await page.fill('input[name="address"]', `${randomCVV}`);

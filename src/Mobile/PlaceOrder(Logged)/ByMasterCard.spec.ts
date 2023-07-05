@@ -1,5 +1,11 @@
 import { expect, test } from "@playwright/test";
 import { userName4 } from "../../common/AccountList";
+import {
+  randomAddress,
+  randomFirstName,
+  randomLastName,
+} from "../../common/randomname";
+import { randomCVV, randomZipCode } from "../../common/randomnumber";
 
 test.use({ viewport: { width: 490, height: 896 } }),
   test("Mobile Place order by Master Card", async ({ page, context }) => {
@@ -26,13 +32,13 @@ test.use({ viewport: { width: 490, height: 896 } }),
       .click({ delay: 500 });
     await expect(page).toHaveURL(/.*checkout/);
     await page.click("//button[text()='Add']");
-    await page.fill('input[name="firstName"]', "Test");
-    await page.fill('input[name="lastName"]', "Abc");
+    await page.fill('input[name="firstName"]', `${randomFirstName}`);
+    await page.fill('input[name="lastName"]', `${randomLastName}`);
     await page.fill('input[name="cardNumber"]', "5555555555554444");
     await page.fill('input[name="expireDate"]', "05/26");
-    await page.fill('input[name="cvv"]', "123");
-    await page.fill('input[name="address"]', "123");
-    await page.fill('input[name="zipcode"]', "123");
+    await page.fill('input[name="cvv"]', `${randomCVV}`);
+    await page.fill('input[name="address"]', `${randomAddress}`);
+    await page.fill('input[name="zipcode"]', `${randomZipCode}`);
     await page.getByRole("button", { name: "Add Card" }).click({ delay: 500 });
     await page.waitForTimeout(3000);
     await page

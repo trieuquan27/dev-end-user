@@ -6,6 +6,7 @@ import {
 } from "../../common/randomname";
 import { randomCVV, randomZipCode } from "../../common/randomnumber";
 import { userName2 } from "../../common/AccountList";
+import { credit } from "../../common/CreditCard";
 
 test.use({ viewport: { width: 1257, height: 961 } }),
   test("view order detial after placing order successfully by mastercard", async ({
@@ -20,7 +21,7 @@ test.use({ viewport: { width: 1257, height: 961 } }),
       .filter({ hasText: /^HomeSell on Go Checkin DealsGet the AppSign In$/ })
       .getByRole("button", { name: "Sign In" })
       .click();
-    // await page.getByPlaceholder("Enter your email").fill("a@a4.com");
+    // await page.getByPlaceholder("Enter your email").fill("a@a4.com");ßß
     await page.getByPlaceholder("Enter your email").fill(`${userName2.Name}`);
     await page
       .getByPlaceholder("Enter your password")
@@ -36,7 +37,7 @@ test.use({ viewport: { width: 1257, height: 961 } }),
     await page.click("//button[text()='Add']");
     await page.fill('input[name="firstName"]', `${randomFirstName}`);
     await page.fill('input[name="lastName"]', `${randomLastName}`);
-    await page.fill('input[name="cardNumber"]', "5555555555554444");
+    await page.fill('input[name="cardNumber"]', `${credit.mastercard}`);
     await page.fill('input[name="expireDate"]', "01/25");
     await page.fill('input[name="cvv"]', `${randomCVV}`);
     await page.fill('input[name="address"]', `${randomAddress}`);

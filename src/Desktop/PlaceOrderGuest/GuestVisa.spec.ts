@@ -5,6 +5,7 @@ import {
   randomLastName,
 } from "../../common/randomname";
 import { randomCVV, randomZipCode } from "../../common/randomnumber";
+import { credit } from "../../common/CreditCard";
 
 test("Guest using visa", async ({ browser }) => {
   const context = await browser.newContext();
@@ -23,7 +24,7 @@ test("Guest using visa", async ({ browser }) => {
   await page.click("//button[text()='Add']");
   await page.fill('input[name="firstName"]', `${randomFirstName}`);
   await page.fill('input[name="lastName"]', `${randomLastName}`);
-  await page.fill('input[name="cardNumber"]', "4242424242424242");
+  await page.fill('input[name="cardNumber"]', `${credit.visa}`);
   await page.fill('input[name="expireDate"]', "01/26");
   await page.fill('input[name="cvv"]', `${randomCVV}`);
   await page.fill('input[name="address"]', `${randomAddress}`);

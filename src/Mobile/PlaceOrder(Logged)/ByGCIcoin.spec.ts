@@ -24,10 +24,7 @@ test.use({ viewport: { width: 490, height: 896 } }),
     await page.getByRole("button", { name: "Proceed To Checkout" }).click();
     await page.waitForTimeout(5000);
     await expect(page).toHaveURL(/.*checkout/);
-    // await page.waitForTimeout(5000);
-    // await page.getByRole('radio', { name: 'Card type Visa •••• •••• •••• 1111' }).click();
-    await page.waitForTimeout(6000);
-    // await expect(page.getByText('Delete')).toBeVisible();
+    await page.waitForTimeout(3000);
     await page.getByRole("button", { name: "Place Order" }).click();
     await page.waitForTimeout(3000);
     await expect(page.getByText("Order placed successfully")).toBeVisible();
