@@ -13,6 +13,13 @@ test("Invalid Signup", async ({ page }) => {
   await enterPwd.fill(invalidString);
   await page.getByPlaceholder("Re-Enter your Password").fill(invalidString);
   await page.getByRole("button", { name: "Sign Up" }).click();
-  await page.waitForTimeout(5000);
+  await expect(
+    page
+      .getByText(
+        "A mixture of numbers and combination of uppercase and lowercase letters"
+      )
+      .count()
+  ).toEqual[1];
+  await page.waitForTimeout(2000);
   await page.close();
 });
