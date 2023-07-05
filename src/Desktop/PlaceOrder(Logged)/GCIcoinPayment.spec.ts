@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-
+import { userName, userPassword } from "../../common/AccountList";
 test.use({ viewport: { width: 1257, height: 961 } }),
   test("Place order successfully by GCI coin", async ({ browser }) => {
     test.setTimeout(60000);
@@ -11,27 +11,21 @@ test.use({ viewport: { width: 1257, height: 961 } }),
       .filter({ hasText: /^HomeSell on Go Checkin DealsGet the AppSign In$/ })
       .getByRole("button", { name: "Sign In" })
       .click();
-    //await page.getByPlaceholder('Enter your phone/email').click();
-    await page.getByPlaceholder("Enter your email").fill("a@a.com");
-    //await page.getByPlaceholder('Enter your phone').press('Tab');
-    await page.getByPlaceholder("Enter your password").fill("Trieu123456789@");
+    await page.getByPlaceholder("Enter your email").fill(`${userName}`);
+    await page.getByPlaceholder("Enter your password").fill(`${userPassword}`);
     await page.getByRole("button", { name: "Sign In" }).click();
-
     await expect(page).toHaveURL("/");
-
     await page.click("(//img[@class='object-cover'])[1]");
-
     await page.getByRole("button", { name: "Buy Now" }).click({ delay: 200 });
     await page.waitForTimeout(5000);
-
     await expect(page).toHaveURL("/cart");
-
     await page.waitForTimeout(3000);
     await page.getByRole("button", { name: "Proceed To Checkout" }).click();
     await expect(page).toHaveURL(/.*checkout/);
     // await page.waitForTimeout(5000);
     // await page.getByRole('radio', { name: 'Card type Visa •••• •••• •••• 1111' }).click();
     await page.waitForTimeout(3000);
+    // Get checkbox locator
     const checkBox = page.getByRole("button", { name: "checkbox" });
     // console.log(checkBox);
     expect(checkBox.isChecked).toBeTruthy();
