@@ -36,13 +36,13 @@ test.use({ viewport: { width: 1257, height: 961 } }),
     await page.waitForTimeout(3000);
     await page.getByRole("button", { name: "Add Card" }).click();
     await page.waitForTimeout(3000);
-    await page.getByRole("button", { name: "Place Order" }).click();
-    await page.waitForTimeout(5000);
     const checkBox = page.getByRole("button", { name: "checkbox" });
     // console.log(checkBox);
     expect(checkBox.isChecked).toBeTruthy();
     await page.waitForTimeout(3000);
-    await page.getByRole("button", { name: "Place Order" }).dblclick();
+    await page
+      .getByRole("button", { name: "Place Order" })
+      .dblclick({ delay: 200 });
     expect(await page.getByText("Something went wrong").count()).toEqual(0);
     expect(
       await page
