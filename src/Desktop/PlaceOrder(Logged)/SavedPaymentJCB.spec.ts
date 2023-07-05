@@ -18,7 +18,7 @@ test.use({ viewport: { width: 1257, height: 961 } }),
     await page.getByPlaceholder("Enter your password").fill("Trieu123456789@");
     await page.getByRole("button", { name: "Sign In" }).click();
     await expect(page).toHaveURL("/");
-    await page.click("img[alt='Nail Polish']");
+    await page.click("(//img[@class='object-cover'])[1]");
     await page
       .getByRole("button", { name: "Buy Now" })
       .dblclick({ delay: 200 });

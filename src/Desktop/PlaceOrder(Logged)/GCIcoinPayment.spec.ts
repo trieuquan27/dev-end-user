@@ -19,7 +19,7 @@ test.use({ viewport: { width: 1257, height: 961 } }),
 
     await expect(page).toHaveURL("/");
 
-    await page.click("img[alt='Nail Polish']");
+    await page.click("(//img[@class='object-cover'])[1]");
 
     await page.getByRole("button", { name: "Buy Now" }).click({ delay: 200 });
     await page.waitForTimeout(5000);

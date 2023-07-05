@@ -3,7 +3,7 @@ test.use({ viewport: { width: 490, height: 896 } }),
   test("Mobile Place order by Visa Guest", async ({ page }) => {
     await page.goto("/");
     await expect(page).toHaveURL("/");
-    await page.click("img[alt='Nail Polish']");
+    await page.click("(//img[@class='object-cover'])[1]");
     await page.getByRole("button", { name: "Buy Now" }).click({ delay: 200 });
     await expect(page).toHaveURL("/cart");
     await page.waitForTimeout(3000);

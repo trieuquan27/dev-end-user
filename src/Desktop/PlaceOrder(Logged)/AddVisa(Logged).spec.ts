@@ -23,7 +23,7 @@ test("view order detial after placing order successfully by visa", async ({
 
   await expect(page).toHaveURL("/");
 
-  await page.click("img[alt='Nail Polish']");
+  await page.click("(//img[@class='object-cover'])[1]");
 
   await page.getByRole("button", { name: "Buy Now" }).click({ delay: 300 });
   await expect(page).toHaveURL("/cart");
