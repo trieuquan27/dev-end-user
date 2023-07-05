@@ -43,7 +43,6 @@ test("view order detail after placing order successfully by visa", async ({
     await page.fill('input[name="cvv"]', "123");
     await page.fill('input[name="address"]', "123");
     await page.fill('input[name="zipcode"]', "123");
-
     await page.waitForTimeout(3000);
     await page.getByRole("button", { name: "Add Card" }).click();
     await page.waitForTimeout(3000);
