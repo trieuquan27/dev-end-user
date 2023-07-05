@@ -9,7 +9,7 @@ import { userName2 } from "../../common/AccountList";
 import { credit } from "../../common/CreditCard";
 
 test.use({ viewport: { width: 1257, height: 961 } }),
-  test("view order detial after placing order successfully by mastercard", async ({
+  test("view order detail after placing order successfully by mastercard", async ({
     browser,
   }) => {
     test.setTimeout(60000);

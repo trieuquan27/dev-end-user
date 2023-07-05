@@ -30,7 +30,7 @@ test("view order detail after placing order successfully by visa", async ({
   console.log(storageState.origins[0]);
   await page.click("(//img[@class='object-cover'])[1]");
   await page.getByRole("button", { name: "Buy Now" }).click({ delay: 500 });
-  await expect(page).toHaveURL("/cart");
+
   const response = await page.waitForResponse(
     async (response) =>
       await getApi({ response: response, path: "/graphql?CartByPK" }),
@@ -38,7 +38,7 @@ test("view order detail after placing order successfully by visa", async ({
   );
   if (response.status() === 200) {
     console.log(response);
-    await page.waitForTimeout(2000);
+    await expect(page).toHaveURL("/cart");
     await page.getByRole("button", { name: "Proceed To Checkout" }).click();
     await expect(page).toHaveURL(/.*checkout/);
     await page.click("//button[text()='Add']");
