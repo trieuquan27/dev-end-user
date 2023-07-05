@@ -9,9 +9,7 @@ test("Remove Cart Logged Case", async ({ browser }) => {
     .filter({ hasText: /^HomeSell on Go Checkin DealsGet the AppSign In$/ })
     .getByRole("button", { name: "Sign In" })
     .click();
-  //await page.getByPlaceholder('Enter your phone/email').click();
   await page.getByPlaceholder("Enter your email").fill("a@a8.com");
-  //await page.getByPlaceholder('Enter your phone').press('Tab');
   await page.getByPlaceholder("Enter your password").fill("123456");
   await page.getByRole("button", { name: "Sign In" }).click();
   await expect(page).toHaveURL("/");

@@ -16,7 +16,6 @@ test.use({ viewport: { width: 490, height: 896 } }),
     console.log(storageState.origins[0].localStorage);
 
     await page.click("(//img[@class='object-cover'])[1]", { delay: 500 });
-    // await page.waitForTimeout(3000);
     await page.getByRole("button", { name: "Buy Now" }).click({ delay: 600 });
     await page.waitForTimeout(5000);
     await expect(page).toHaveURL("/cart");

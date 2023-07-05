@@ -19,8 +19,9 @@ test("view order detail after placing order successfully by visa", async ({
   await page.getByPlaceholder("Enter your email").fill("a@a78.com");
   await page.getByPlaceholder("Enter your password").fill("Trieu123456789@");
   await page.getByRole("button", { name: "Sign In" }).click();
-
   await expect(page).toHaveURL("/");
+  const storageState = await context.storageState();
+  console.log(storageState.origins[0]);
   await page.click("(//img[@class='object-cover'])[1]");
   await page.getByRole("button", { name: "Buy Now" }).click({ delay: 500 });
   await expect(page).toHaveURL("/cart");
@@ -31,7 +32,6 @@ test("view order detail after placing order successfully by visa", async ({
   );
   if (response.status() === 200) {
     console.log(response);
-
     await page.waitForTimeout(5000);
     await page.getByRole("button", { name: "Proceed To Checkout" }).click();
     await expect(page).toHaveURL(/.*checkout/);
