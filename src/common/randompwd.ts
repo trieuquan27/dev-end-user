@@ -1,10 +1,3 @@
-// var randomstring =
-//   Math.random().toString(36).slice(-8).toLowerCase() +
-//   Math.random().toString(36).slice(-8).toUpperCase();
-// var symBols = "!";
-
-// var randomstring1 = randomstring + symBols;
-
 function generatePassword(passwordLength) {
   var numberChars = "0123456789";
   var upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
