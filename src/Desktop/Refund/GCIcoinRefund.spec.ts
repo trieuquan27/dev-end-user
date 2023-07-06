@@ -14,7 +14,7 @@ test("GCI coin refund", async ({ page }) => {
     .filter({ hasText: /^HomeSell on Go Checkin DealsGet the AppSign In$/ })
     .getByRole("button", { name: "Sign In" })
     .click();
-  await page.getByPlaceholder("Enter your email").fill(`${userName}`);
+  await page.getByPlaceholder("Enter your email").fill(`${userName.Name}`);
   await page
     .getByPlaceholder("Enter your password")
     .fill(`${userName.Password}`);

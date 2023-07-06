@@ -3,8 +3,8 @@ import {
   randomAddress,
   randomFirstName,
   randomLastName,
-} from "../../common/randomname";
-import { randomCVV, randomZipCode } from "../../common/randomnumber";
+} from "../../common/RandomName";
+import { randomCVV, randomZipCode } from "../../common/RandomNumber";
 import { userName2 } from "../../common/AccountList";
 import { credit } from "../../common/CreditCard";
 

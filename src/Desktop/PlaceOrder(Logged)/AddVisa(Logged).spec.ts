@@ -1,8 +1,8 @@
 import { expect, test } from "@playwright/test";
 import { getApi } from "../../common/getapi";
-import { randomCVV, randomZipCode } from "../../common/randomnumber";
-import { randomFirstName } from "../../common/randomname";
-import { randomLastName } from "../../common/randomname";
+import { randomCVV, randomZipCode } from "../../common/RandomNumber";
+import { randomFirstName } from "../../common/RandomName";
+import { randomLastName } from "../../common/RandomName";
 import { userName3 } from "../../common/AccountList";
 import { credit } from "../../common/CreditCard";
 

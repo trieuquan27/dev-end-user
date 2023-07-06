@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { randomEmail } from "../../common/randomemail";
 import { emailPwd } from "../../common/randompwd";
+import { userName } from "../../common/AccountList";
 
 test("Valid Signup", async ({ page }) => {
   await page.goto("/");
@@ -11,8 +12,10 @@ test("Valid Signup", async ({ page }) => {
   await page.waitForTimeout(3000);
   await page.getByPlaceholder("Enter your email").fill(randomEmail);
   const enterPwd = page.getByPlaceholder("Enter your Password").first();
-  await enterPwd.fill(emailPwd);
-  await page.getByPlaceholder("Re-Enter your Password").fill(emailPwd);
+  await enterPwd.fill(`${userName.Password}`);
+  await page
+    .getByPlaceholder("Re-Enter your Password")
+    .fill(`${userName.Password}`);
   await page.getByRole("button", { name: "Sign Up" }).click();
   await page.waitForTimeout(5000);
   await page.close();
