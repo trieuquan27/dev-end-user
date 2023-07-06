@@ -6,7 +6,7 @@ test.use({ viewport: { width: 1257, height: 961 } }),
   test("view order detial after placing order successfully by mastercard", async ({
     browser,
   }) => {
-    test.setTimeout(600000);
+    test.setTimeout(60000);
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto("/");
