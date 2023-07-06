@@ -33,6 +33,7 @@ test("A mixture of numbers and combination of uppercase and lowercase letters", 
 
 test("Password not match", async ({ page }) => {
   await page.goto("/");
+  await page.waitForTimeout(2000);
   await page.getByRole("button", { name: "Sign In" }).first().click();
   await expect(page).toHaveURL("/signin");
   await page.getByRole("link", { name: "Sign Up" }).click();
