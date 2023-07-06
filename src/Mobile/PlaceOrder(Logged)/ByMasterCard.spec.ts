@@ -4,8 +4,8 @@ import {
   randomAddress,
   randomFirstName,
   randomLastName,
-} from "../../common/randomname";
-import { randomCVV, randomZipCode } from "../../common/randomnumber";
+} from "../../common/RandomName";
+import { randomCVV, randomZipCode } from "../../common/RandomNumber";
 
 test.use({ viewport: { width: 490, height: 896 } }),
   test("Mobile Place order by Master Card", async ({ page, context }) => {
