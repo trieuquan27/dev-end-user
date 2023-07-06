@@ -8,6 +8,7 @@ import { userName2 } from "../../common/AccountList";
 test("A mixture of numbers and combination of uppercase and lowercase letters", async ({
   page,
 }) => {
+  test.setTimeout(10000);
   await page.goto("/");
   await page.getByRole("button", { name: "Sign In" }).first().click();
   await expect(page).toHaveURL("/signin");
@@ -117,7 +118,7 @@ test("Phone number only accept US.", async ({ page }) => {
   page.close();
 });
 
-test("Tel number is US only (All info are valid execept phone no)", async ({
+test("Phone number is US only (All info are valid execept phone no)", async ({
   page,
 }) => {
   await page.goto("/");
