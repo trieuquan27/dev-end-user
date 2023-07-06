@@ -1,5 +1,4 @@
 import { randomEmail } from "../../common/randomemail";
-import { emailPwd } from "../../common/randompwd";
 import { userName } from "../../common/AccountList";
 import { test, expect } from "@playwright/test";
 

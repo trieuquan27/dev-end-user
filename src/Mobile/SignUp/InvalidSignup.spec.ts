@@ -2,7 +2,6 @@ import { test, expect } from "@playwright/test";
 import { randomEmail } from "../../common/randomemail";
 import { invalidString } from "../../common/Invalidstring";
 import { randomNum } from "../../common/RandomNumber";
-import { formatPhoneNumber } from "../../common/RandomUSTel";
 import { userName2 } from "../../common/AccountList";
 
 test.use({ viewport: { width: 490, height: 896 } }),
