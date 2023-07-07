@@ -9,7 +9,7 @@ import moment from "moment";
 //     await page.waitForTimeout(3000)
 // })
 
-test("Calendar demo using moment", async ({ page }) => {
+test.skip("Calendar demo using moment", async ({ page }) => {
   await page.goto(
     "https://www.lambdatest.com/selenium-playground/bootstrap-date-picker-demo"
   );

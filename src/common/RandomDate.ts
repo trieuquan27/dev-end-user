@@ -1,30 +1,25 @@
-// const d = new Date();
-// let date = d.getDate();
-// let month = d.getMonth();
-// let year = d.getFullYear();
-// let toDay = `${date}` + "/" + `${month}` + "/" + `${year}`;
+// function randomdate(date1, date2) {
+//   function randomValueBetween(min, max) {
+//     return Math.random() * (max - min) + min;
+//   }
+//   var date1 = date1 || "";
+//   var date2 = date2 || new Date().toLocaleDateString();
+//   date1 = new Date(date1).getTime();
+//   date2 = new Date(date2).getTime();
+//   if (date1 > date2) {
+//     return new Date(randomValueBetween(date2, date1)).toLocaleDateString();
+//   } else {
+//     return new Date(randomValueBetween(date1, date2)).toLocaleDateString();
+//   }
+// }
+// let d = randomdate("2024", "2045");
+// let randomDate2 = d;
+// console.log(randomDate2);
 
-// console.log(toDay);
+const d = new Date();
+let date = d.getDate();
+let month = d.getMonth();
+let year = d.getFullYear();
+let toDay = `${date}` + "/" + `${month}` + "/" + `${year}`;
 
-// var date = function random(start, end) {};
-// // var formattedDate = date.getFullYear() + "-" + (date.getMonth() + 1);
-
-// console.log(date(2, 1));
-
-function randomdate(date1, date2) {
-  function randomValueBetween(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-  var date1 = date1 || "";
-  var date2 = date2 || new Date().toLocaleDateString();
-  date1 = new Date(date1).getTime();
-  date2 = new Date(date2).getTime();
-  if (date1 > date2) {
-    return new Date(randomValueBetween(date2, date1)).toLocaleDateString();
-  } else {
-    return new Date(randomValueBetween(date1, date2)).toLocaleDateString();
-  }
-}
-let d = randomdate("2024", "2045");
-let randomDate2 = d;
-console.log(randomDate2);
+console.log(toDay);
