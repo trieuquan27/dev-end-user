@@ -16,10 +16,10 @@
 // let randomDate2 = d;
 // console.log(randomDate2);
 
+function randomDate() {}
 const d = new Date();
 let date = d.getDate();
 let month = d.getMonth();
 let year = d.getFullYear();
 let toDay = `${date}` + "/" + `${month}` + "/" + `${year}`;
-
 console.log(toDay);
