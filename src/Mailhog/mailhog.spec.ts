@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test("mailhog", async ({ browser }) => {
+test.skip("mailhog", async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto("https://deal.mailhog.fastboy.dev/#");

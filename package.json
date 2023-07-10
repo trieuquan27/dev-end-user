@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "playwright codegen --ignore-https-errors"
+    "test": "playwright test src"
   },
   "keywords": [],
   "author": "",
