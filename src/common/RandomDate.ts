@@ -21,5 +21,5 @@ const d = new Date();
 let date = d.getDate();
 let month = d.getMonth();
 let year = d.getFullYear();
-let toDay = `${date}` + "/" + `${month}` + "/" + `${year}`;
+let toDay = ` ${month}` + "/" + `${year}`;
 console.log(toDay);
