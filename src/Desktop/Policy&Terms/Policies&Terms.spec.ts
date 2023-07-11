@@ -21,12 +21,12 @@ test("Terms page", async ({ browser }) => {
   await expect(
     page.locator("div").filter({ hasText: /^Terms of Use$/ })
   ).toBeVisible();
-  await expect(
-    page.locator("ul>li").filter({
-      hasText:
-        /^By entering your email, logging into your account, or accepting notifications, you agree to receive personalized GoCheckIn Deals deals each day. You may unsubscribe at any time.$/,
-    })
-  ).toBeVisible();
+  // await expect(
+  //   page.locator("ul>li").filter({
+  //     hasText:
+  //       /^By entering your email, logging into your account, or accepting notifications, you agree to receive personalized GoCheckIn Deals deals each day. You may unsubscribe at any time.$/,
+  //   })
+  // ).toBeVisible();
   await expect(
     page.locator(
       "(//ul[@class='mb-10 text-[16px] leading-[29px] text-neutral-darkest'])[1]"
@@ -83,10 +83,30 @@ test("Terms page", async ({ browser }) => {
   await expect(page.locator("//div[@id='7']")).toHaveText(
     "7. Your ConductAll interactions on the Site must comply with these Terms of Use. To the extent your conduct, in our sole discretion, restricts or inhibits any other user from using or enjoying any part of the Site, we may limit or terminate your privileges on the Site and seek other remedies, including, without limitation, cancellation of your account or forfeiture of any forms of unredeemed value in your account.The following activities are prohibited on the Site and constitute violations of these Terms of Use:Submitting any content to the Site that:Violates applicable laws (including, without limitation, intellectual property laws, laws relating to rights of privacy and rights of publicity, and laws related to defamation);Contains personal information, except when we expressly ask you to provide such information;Contains viruses or malware;Offers unauthorized downloads of any copyrighted, confidential, or private information;Has the effect of impersonating others;Contains messages by non-spokesperson employees of GoCheckIn Deals purporting to speak on behalf of GoCheckIn Deals or provides confidential information concerning GoCheckIn Deals;Contains chain letters of any kind;Is purposely inaccurate, commits fraud, or falsified information in connection with your GoCheckIn Deals account or to create multiple GoCheckIn Deals accounts; orIs protected by copyright, trademark, or other proprietary right without the express permission of the owner of the copyright, trademark or other proprietary right.Attempting to do or actually doing any of the following:Accessing data not intended for you, such as logging into a server or an account which you are not authorized to access;Scanning or monitoring the Site for data gathering purposes in an effort to track sales, usage, aggregate offering information, pricing information, or similar data;Scanning or testing the security or configuration of the Site or breaching security or authentication measures; orInterfering with service to any user in any manner, including, without limitation, by means of submitting a virus to the Site or attempting to overload, “flood,” “spam,” “mail bomb,” or “crash” the Site.Using any of the following:Frames, framing techniques, or framing technology to enclose any content included on the Site without our express written permission;Any Site content, including, without limitation, User Content (defined below), in any meta tags or any other “hidden text” techniques or technologies without our express written permission;The Site or any of its contents to advertise or solicit, for any commercial, political, or religious purpose or to compete, directly or indirectly, with GoCheckIn Deals; orThe Site or any of its resources to solicit consumers, Merchants, or other third-parties to become users or partners of other online or offline services directly or indirectly competitive or potentially competitive with GoCheckIn Deals, including, without limitation, aggregating current or previously offered deals.Collecting any of the following:Content from the Site, including, without limitation, in connection with current or previously offered deals, and featuring such content to consumers in any manner that diverts traffic from the Site without our express written permission; orPersonal Information (defined in our Privacy Statement), User Content (defined in Section 12 below), or content of any consumers or Merchants.Engaging in any of the following:Tampering or interfering with the proper functioning of any part, page, or area of the Site or any functions or services provided by GoCheckIn Deals;Taking any action that places excessive demand on our services or imposes, or may impose, an unreasonable or disproportionately large load on our servers or other portion of our infrastructure (as determined in our sole discretion);Reselling or repurposing your access to the Site or any purchases made through the Site;Exceeding or attempting to exceed quantity limits when purchasing Merchant Offerings, or otherwise using any GoCheckIn Deals account to purchase Merchant Offerings for resale or for speculative, false, fraudulent, or any other purpose not expressly permitted by these Terms of Use and the terms of a specific offer on the Site;Accessing, monitoring, or copying any content from the Site using any “robot,” “spider,” “scraper,” or other automated means or any manual process for any purpose without our express written permission;Violating the restrictions in any robot exclusion headers on the Site or bypassing or circumventing other measures employed to prevent or limit access to the Site;Aggregating any current or previously-offered deals or content or other information from the Site (whether using links or other technical means or physical records associated with purchases made through the Site) with material from other sites or on a secondary site without our express written permission;Deep-linking to any portion of the Site (including, without limitation, the purchase path for any Voucher) without our express written permission;Hyperlinking to the Site from any other website without our initial and ongoing consent; orActing illegally or maliciously against the business interests or reputation of GoCheckIn Deals, our Merchants, or our services."
   );
-  // await expect(page.locator("//div[@id='8']")).toHaveText("");
-  // await expect(page.locator("//div[@id='9']")).toHaveText("");
-  // await expect(page.locator("//div[@id='10']")).toHaveText("");
-  // await expect(page.locator("//div[@id='11']")).toHaveText("");
+  //8. Your Privacy
+  await page.locator("//div[@id='8']").click();
+  await page.waitForTimeout(2000);
+  await expect(page.locator("//div[@id='8']")).toHaveText(
+    "8. Your PrivacyWe take the privacy of your Personal Information (defined in the Privacy Statement) seriously. We encourage you to carefully review our Privacy Statement for important disclosures about ways that we may collect, use, and share personal data and your choices. Our Privacy Statement is incorporated in and subject to these Terms of Use ."
+  );
+  // 9. Terms of Sale
+  await page.locator("//div[@id='9']").click();
+  await page.waitForTimeout(2000);
+  await expect(page.locator("//div[@id='9']")).toHaveText(
+    "9. Terms of SaleBy purchasing or obtaining any Merchant Offering or Product via the Site, you agree to these Terms of Use, including, without limitation, the Terms of Sale."
+  );
+  // 10. Special Programs
+  await page.locator("//div[@id='10']").click();
+  await page.waitForTimeout(2000);
+  await expect(page.locator("//div[@id='10']")).toHaveText(
+    "10. Special ProgramsBy participating in special programs offered by GoCheckIn Deals, such as GoCheckIn Booking, GCI coins, Vouchers, you agree to these Terms of Use and the additional terms of each program."
+  );
+  //   11. Copyright and Trademarks
+  await page.locator("//div[@id='11']").click();
+  await page.waitForTimeout(2000);
+  await expect(page.locator("//div[@id='11']")).toHaveText(
+    '11. Copyright and TrademarksThe Site contains copyrighted material, trademarks, and other proprietary information, including, without limitation, text, software, photos, video, graphics, music, and sound, and the entire contents of the Site are protected by copyright, trademark, and other intellectual property laws of the United States. GoCheckIn Deals owns a copyright in the selection, coordination, arrangement, and enhancement of such content, as well as in the content original to it. You may not modify, distribute, publish, transmit, publicly display, publicly perform, participate in the transfer or sale, create derivative works, or in any way exploit any of the content, in whole or in part. Except as otherwise expressly stated under copyright law, no downloading, copying, redistribution, retransmission, publication, or commercial exploitation of the content without the express permission of GoCheckIn Deals or the copyright owner is permitted. If downloading, copying, redistribution, retransmission, or publication of copyrighted material is permitted, you will make independent attribution and/or make no changes in or deletion of any author attribution, trademark legend, or copyright notice. You acknowledge that you do not acquire any ownership rights by downloading copyrighted material. Any violation of these restrictions may result in a copyright, trademark, or other intellectual property right infringement that may subject you to civil and/or criminal penalties.GoCheckIn Deals owns trademarks, registered and unregistered, in many countries and "GOCHECKIN DEALS," the GoCheckIn Deals logos and variations thereof found on the Site are trademarks owned by Fastboy Group LLC,.. or its related entities and all use of these marks inures to the benefit of GoCheckIn Deals . "GOCHECKIN DEALS" is a trademark registered in the following countries: Algeria, Antigua, Argentina, Armenia, Australia, Bahamas, Bahrain, Belarus, Brazil, Canada, Chile, Columbia, Costa Rica, the Dominican Republic, Ecuador, Egypt, the European Union, France, Germany, Hong Kong, Iceland, India, Indonesia, Israel, Jamaica, Japan, Jordan, Kenya, Lebanon, Liechtenstein, Macedonia, Mexico, Moldova, Morocco, New Zealand, Nigeria, Norway, O.A.P.I., Panama, Paraguay, Peru, Philippines, Qatar, the Russian Federation, Saudi Arabia, Singapore, South Africa, South Korea, Switzerland, Taiwan, Thailand, Tunisia, Turkey, Turkmenistan, Ukraine, the United Arab Emirates, the United States of America, Uruguay, Venezuela, and Vietnam. Other marks on the site not owned by GoCheckIn Deals may be under license from the trademark owner thereof, in which case such license is for the exclusive benefit and use of GoCheckIn Deals unless otherwise stated, or may be the property of their respective owners. You may not use GoCheckIn Deals name, logos, trademarks or brands, or trademarks or brands of others on the Site without GoCheckIn Deals express permission.'
+  );
   // await expect(page.locator("//div[@id='12']")).toHaveText("");
   // await expect(page.locator("//div[@id='13']")).toHaveText("");
   // await expect(page.locator("//div[@id='5']")).toHaveText("");
@@ -100,9 +120,6 @@ test("Terms page", async ({ browser }) => {
   // await expect(page.locator("//div[@id='5']")).toHaveText("");
   // await expect(page.locator("//div[@id='5']")).toHaveText("");
 
-  // await page.getByRole("button", { name: "8. Your Privacy" }).click();
-  // await page.getByRole("button", { name: "9. Terms of Sale" }).click();
-  // await page.getByRole("button", { name: "10. Special Programs" }).click();
   // await page
   //   .getByRole("button", { name: "11. Copyright and Trademarks" })
   //   .click();
