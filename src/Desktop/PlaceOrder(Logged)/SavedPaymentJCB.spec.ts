@@ -3,7 +3,7 @@ import { getApi } from "../../common/getapi";
 import { userName4 } from "../../common/AccountList";
 
 test.use({ viewport: { width: 1257, height: 961 } }),
-  test("view order detial after placing order successfully by mastercard", async ({
+  test("view order detail after placing order successfully by mastercard", async ({
     browser,
   }) => {
     test.setTimeout(60000);

@@ -4,7 +4,7 @@ import {
   randomFirstName,
   randomLastName,
 } from "../../common/randomname";
-import { randomCVV, randomZipCode } from "../../common/randomnumber";
+import { randomCVV, randomZipCode } from "../../common/RandomNumber";
 import { credit } from "../../common/CreditCard";
 
 test("Guest using visa", async ({ browser }) => {

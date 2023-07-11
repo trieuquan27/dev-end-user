@@ -1,7 +1,3 @@
-// var a = Math.round(Math.random() * 10);
-// // var b = Math.floor(Math.random() * 10);
-// // var c = Math.floor(Math.random() * 10);
-
 function generate(length) {
   var chars = "0123456789",
     result = "";

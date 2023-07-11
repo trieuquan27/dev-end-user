@@ -2,14 +2,11 @@ import { expect, test } from "@playwright/test";
 
 test.use({ viewport: { width: 1920, height: 961 } });
 
-test("view order detial after placing order successfully by visa", async ({
-  browser,
-}) => {
+test("Visa Refund", async ({ browser }) => {
   test.setTimeout(60000);
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto("/");
-
   await page
     .locator("div")
     .filter({ hasText: /^HomeSell on Go Checkin DealsGet the AppSign In$/ })
