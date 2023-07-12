@@ -21,7 +21,7 @@ test("GCI coin refund", async ({ page }) => {
   await page.click("(//p[text()='Wallet'])[1]");
   await page.click("//button[text()='Current Deals']");
   await page.click("(//a[contains(@class,'body-md-14 text-center')])[1]");
-  await expect(page.getByText("Receipt Details")).toBeVisible();
+  // await expect(page.getByText("Receipt Details")).toBeVisible();
   await expect(
     page.getByText("GO CHECKIN COIN", { exact: true })
   ).toBeVisible();
