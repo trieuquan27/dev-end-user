@@ -7,4 +7,8 @@ test.skip("mailhog", async ({ browser }) => {
   await expect(page.getByRole("heading", { name: "Sign In" })).toBeVisible();
   await page.getByPlaceholder("Username").fill("fastboy");
   await page.getByPlaceholder("Password").fill("ilovefastboy");
+  const alert = page.locator(".alert-primary").first();
+  // const initialColor = await alert.evaluate((el) => {
+  //   return getComputedStyle(el).fontSize;
+  // });
 });
