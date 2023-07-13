@@ -11,12 +11,29 @@ test.use({ viewport: { width: 490, height: 896 } }),
     await page.getByRole("link", { name: "Sign Up" }).click();
     await page.waitForTimeout(3000);
     await page.getByPlaceholder("Enter your email").fill(randomEmail);
-    const enterPwd = page.getByPlaceholder("Enter your Password").first();
+    // enter password
+    let enterPwd = page.getByPlaceholder("Enter your Password").first();
     await enterPwd.fill(`${userName.Password}`);
     await page
-      .getByPlaceholder("Re-Enter your Password")
-      .fill(`${userName.Password}`);
+      .locator(
+        "(//span[contains(@class,'cursor-pointer text-neutral-tints')])[1]"
+      )
+      .click();
+    await expect(enterPwd).toHaveAttribute("type", "text");
+    //re-enter password
+    let reenterPwd = page.getByPlaceholder("Re-Enter your Password");
+    await reenterPwd.fill(`${userName.Password}`);
+    await page
+      .locator(
+        "(//span[contains(@class,'cursor-pointer text-neutral-tints')])[2]"
+      )
+      .click();
+    await expect(reenterPwd).toHaveAttribute("type", "text");
     await page.getByRole("button", { name: "Sign Up" }).click();
-    await page.waitForTimeout(5000);
-    await page.close();
+    await page.waitForTimeout(3000);
+    await expect(page).toHaveURL(/.*verification/);
+    await expect(
+      page.getByRole("button", { name: "Resend Email" })
+    ).toBeVisible();
+    // await page.close();
   });
