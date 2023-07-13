@@ -11,6 +11,7 @@ import { randomCVV } from "../../common/randomnumber";
 
 //Mobile viewport
 test.use({ viewport: { width: 490, height: 896 } });
+//Test script
 test("First name is required", async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
