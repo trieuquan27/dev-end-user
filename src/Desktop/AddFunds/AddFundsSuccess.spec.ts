@@ -1,11 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { userName5 } from "../../common/AccountList";
-test.afterEach(async ({ page }, testInfo) => {
-  console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
 
-  if (testInfo.status !== testInfo.expectedStatus)
-    console.log(`Did not run as expected, ended up at ${page.url()}`);
-});
 // test.use({viewport:{width:490,height:896}}),
 test("Add Funds Success", async ({ page }) => {
   await page.goto("/");

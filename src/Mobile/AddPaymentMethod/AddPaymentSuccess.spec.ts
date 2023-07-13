@@ -1,0 +1,46 @@
+import { test, expect } from "@playwright/test";
+import { userName8 } from "../../common/AccountList";
+import {
+  randomFirstName,
+  randomLastName,
+  randomAddress,
+} from "../../common/randomname";
+import { credit } from "../../common/CreditCard";
+import { randomZipCode } from "../../common/randomnumber";
+import { randomCVV } from "../../common/randomnumber";
+
+//Mobile viewport
+test.use({ viewport: { width: 490, height: 896 } });
+test("Add visa card", async ({ browser }) => {
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  await page.goto("/");
+  await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
+  await page.click("(//span[contains(@class,'flex items-center')])[3]");
+  await expect(page).toHaveURL("/signin");
+  //a@a88.com
+  await page.fill('input[name="username"]', `${userName8.Name}`);
+  await page.fill('input[name="password"]', `${userName8.Password}`);
+  await page.getByRole("button", { name: "Sign In" }).click();
+  await expect(page).toHaveURL("/");
+  //Navigate to Payment Method
+  await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
+  await page.click("//a[contains(text(),'Payment Method')]");
+  //   await page.click("(//p[text()='Payment Method'])[1]");
+  await expect(page).toHaveURL(
+    "https://dev.gocheckin.io/profile/payment-method"
+  );
+  // Add new payment card
+  await page.getByRole("button", { name: "add" }).click();
+  await expect(page.getByText("Card Information")).toBeVisible();
+  await page.getByPlaceholder("First Name").fill(`${randomFirstName}`);
+  await page.getByPlaceholder("Last Name").fill(`${randomLastName}`);
+  await page.getByPlaceholder("XXXX-XXXX-XXXX-XXXX").fill(`${credit.visa2}`);
+  await page.getByPlaceholder("MM/YY").fill("10/30");
+  await page.getByPlaceholder("XXX", { exact: true }).fill(`${randomCVV}`);
+  await page.getByPlaceholder("e.g. 77042").fill(`${randomZipCode}`);
+  await page.getByPlaceholder("Address").fill(`${randomAddress}`);
+  await page.getByRole("button", { name: "Add Card" }).click();
+  await expect(page.getByText("Your card added successful")).toBeVisible();
+  page.close();
+});
