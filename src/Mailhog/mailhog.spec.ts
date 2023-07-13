@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
-//test AfterEach
-test.afterEach(async ({ page }, testInfo) => {
-  console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
+//test AftereEach
+// test.afterEach(async ({ page }, testInfo) => {
+//   console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
 
-  if (testInfo.status !== testInfo.expectedStatus)
-    console.log(`Did not run as expected, ended up at ${page.url()}`);
-});
+//   if (testInfo.status !== testInfo.expectedStatus)
+//     console.log(`Did not run as expected, ended up at ${page.url()}`);
+// });
 // test script
 test("mailhog", async ({ browser }) => {
   const context = await browser.newContext({
@@ -18,7 +18,4 @@ test("mailhog", async ({ browser }) => {
   await page.goto("https://deal.mailhog.fastboy.dev/");
   await expect(page).toHaveURL("https://deal.mailhog.fastboy.dev/");
   await page.close();
-  // const initialColor = await alert.evaluate((el) => {
-  //   return getComputedStyle(el).fontSize;
-  // });
 });
