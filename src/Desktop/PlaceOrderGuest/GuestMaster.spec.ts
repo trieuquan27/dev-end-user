@@ -32,9 +32,7 @@ test("Guest using visa", async ({ browser }) => {
   await page.waitForTimeout(3000);
   await page.getByRole("button", { name: "Add Card" }).click();
   await page.waitForTimeout(5000);
-  const checkBox = page.getByRole("button", { name: "checkbox" });
-  // console.log(checkBox);
-  expect(checkBox.isChecked).toBeTruthy();
+  expect(page.getByRole("checkbox").nth(1).isChecked());
   await page.waitForTimeout(3000);
   await page.getByRole("button", { name: "Place Order" }).dblclick();
   expect(await page.getByText("Something went wrong").count()).toEqual(0);
@@ -45,8 +43,56 @@ test("Guest using visa", async ({ browser }) => {
   ).toEqual(0);
   expect(await page.getByText("Cart Must have a payment.").count()).toEqual(0);
   expect(await page.getByText("Order placed successfully")).toBeVisible();
+  await page.waitForTimeout(2000);
   await expect(page).toHaveURL(/.*thank-you/);
-  // await page.click("//a[contains(text(),'View Order')]");
+  await expect(page).toHaveURL(/.*order/);
+  await expect(page.getByText("Create Account")).toBeVisible();
+  await expect(page.getByText("d@v.com")).toBeVisible();
+  await expect(page.getByPlaceholder("Enter your email")).toHaveValue(
+    "d@v.com"
+  );
+  page.close();
+});
+
+test("Guest using visa uncheck save money checkbox", async ({ browser }) => {
+  const context = await browser.newContext();
+  test.setTimeout(60000);
+  const page = await context.newPage();
+  await page.goto("/");
+  await expect(page).toHaveURL("/");
+  await page.click("(//img[@class='object-cover'])[1]");
+  await page.getByRole("button", { name: "Buy Now" }).dblclick();
+  await page.waitForTimeout(3000);
+  await expect(page).toHaveURL("/cart");
+  await page.getByRole("button", { name: "Proceed To Checkout" }).click();
+  await expect(page).toHaveURL(/.*checkout/);
+  await page.click("input[placeholder='Enter email']");
+  await page.fill("input[placeholder='Enter email']", "d@v.com");
+  await page.getByRole("checkbox").first().uncheck();
+  expect(page.getByRole("checkbox").first().isChecked);
+  await page.click("//button[text()='Add']");
+  await page.fill('input[name="firstName"]', `${randomFirstName}`);
+  await page.fill('input[name="lastName"]', `${randomLastName}`);
+  await page.fill('input[name="cardNumber"]', `${credit.mastercard}`);
+  await page.fill('input[name="expireDate"]', "01/29");
+  await page.fill('input[name="cvv"]', `${randomCVV}`);
+  await page.fill('input[name="address"]', `${randomAddress}`);
+  await page.fill('input[name="zipcode"]', `${randomZipCode}`);
+  await page.waitForTimeout(3000);
+  await page.getByRole("button", { name: "Add Card" }).click();
+  await page.waitForTimeout(3000);
+  expect(page.getByRole("checkbox").nth(1).isChecked());
+  await page.getByRole("button", { name: "Place Order" }).dblclick();
+  expect(await page.getByText("Something went wrong").count()).toEqual(0);
+  expect(
+    await page
+      .getByText("Payment failed. Please check your payment information.")
+      .count()
+  ).toEqual(0);
+  expect(await page.getByText("Cart Must have a payment.").count()).toEqual(0);
+  expect(await page.getByText("Order placed successfully")).toBeVisible();
+  await page.waitForTimeout(2000);
+  await expect(page).toHaveURL(/.*thank-you/);
   await expect(page).toHaveURL(/.*order/);
   await expect(page.getByText("Create Account")).toBeVisible();
   await expect(page.getByText("d@v.com")).toBeVisible();

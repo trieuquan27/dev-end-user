@@ -111,17 +111,11 @@ test("Terms page", async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto("/");
-  await page.click("//a[normalize-space()='Terms']");
+  await page.click("//a[contains(text(),'Term of Use')]");
   await expect(page).toHaveURL("https://dev.gocheckin.io/terms-of-use");
   await expect(
     page.locator("div").filter({ hasText: /^Terms of Use$/ })
   ).toBeVisible();
-  // await expect(
-  //   page.locator("ul>li").filter({
-  //     hasText:
-  //       /^By entering your email, logging into your account, or accepting notifications, you agree to receive personalized GoCheckIn Deals deals each day. You may unsubscribe at any time.$/,
-  //   })
-  // ).toBeVisible();
   await expect(
     page.locator(
       "(//ul[@class='mb-10 text-[16px] leading-[29px] text-neutral-darkest'])[1]"

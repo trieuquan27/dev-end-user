@@ -6,8 +6,6 @@ import { randomLastName } from "../../common/randomname";
 import { userName3 } from "../../common/AccountList";
 import { credit } from "../../common/CreditCard";
 
-test.use({ viewport: { width: 1920, height: 961 } });
-
 test("view order detail after placing order successfully by visa", async ({
   browser,
 }) => {

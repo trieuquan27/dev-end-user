@@ -17,9 +17,7 @@ export default defineConfig({
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-
   /* Retry on CI only */
-  // retries: 2,
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 1,
@@ -30,10 +28,7 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: "https://dev.gocheckin.io",
     //Credentials for HTTP authentication. If no origin is specified, the username and password are sent to any servers upon unauthorized responses.
-    httpCredentials: {
-      username: "name",
-      password: "password",
-    },
+    viewport: { width: 1920, height: 1080 },
     // ignoreHTTPSErrors: true,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     // trace: "on-first-retry",
@@ -43,7 +38,7 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: { browserName: "chromium" },
     },
 
     // {

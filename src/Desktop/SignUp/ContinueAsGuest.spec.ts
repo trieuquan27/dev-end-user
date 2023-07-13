@@ -1,7 +1,5 @@
 import { expect, test } from "@playwright/test";
 
-test.use({ viewport: { width: 1920, height: 961 } });
-
 test("continue as guest", async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();

@@ -5,7 +5,7 @@ import {
   randomLastName,
 } from "../../common/randomname";
 import { credit } from "../../common/CreditCard";
-import { randomCVV, randomZipCode } from "../../common/randomnumber";
+import { randomCVV, randomZipCode } from "../../common/RandomNumber";
 
 test("Guest using visa", async ({ browser }) => {
   const context = await browser.newContext();

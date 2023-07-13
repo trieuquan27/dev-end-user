@@ -1,7 +1,5 @@
 import { expect, test } from "@playwright/test";
 
-test.use({ viewport: { width: 1920, height: 961 } });
-
 test("Visa Refund", async ({ browser }) => {
   test.setTimeout(60000);
   const context = await browser.newContext();

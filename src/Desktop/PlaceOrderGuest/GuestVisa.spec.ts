@@ -4,7 +4,7 @@ import {
   randomFirstName,
   randomLastName,
 } from "../../common/randomname";
-import { randomCVV, randomZipCode } from "../../common/randomnumber";
+import { randomCVV, randomZipCode } from "../../common/RandomNumber";
 import { credit } from "../../common/CreditCard";
 
 test("Guest using visa", async ({ browser }) => {
@@ -46,7 +46,7 @@ test("Guest using visa", async ({ browser }) => {
   expect(await page.getByText("Cart Must have a payment.").count()).toEqual(0);
   expect(await page.getByText("Order placed successfully")).toBeVisible();
   await expect(page).toHaveURL(/.*thank-you/);
-  // await page.click("//a[contains(text(),'View Order')]");
+  await page.waitForTimeout(2000);
   await expect(page).toHaveURL(/.*order/);
   await expect(page.getByText("Create Account")).toBeVisible();
   await expect(page.getByText("v@v.com")).toBeVisible();
