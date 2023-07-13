@@ -1,7 +1,12 @@
 import { expect, test } from "@playwright/test";
 import { getApi } from "../../common/getapi";
 import { userName4 } from "../../common/AccountList";
+test.afterEach(async ({ page }, testInfo) => {
+  console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
 
+  if (testInfo.status !== testInfo.expectedStatus)
+    console.log(`Did not run as expected, ended up at ${page.url()}`);
+});
 test("view order detail after placing order successfully by mastercard", async ({
   browser,
 }) => {

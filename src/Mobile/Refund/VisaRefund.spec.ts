@@ -1,6 +1,13 @@
 import { test, expect } from "@playwright/test";
 import { userName6 } from "../../common/AccountList";
+//test AfterEach
+test.afterEach(async ({ page }, testInfo) => {
+  console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
 
+  if (testInfo.status !== testInfo.expectedStatus)
+    console.log(`Did not run as expected, ended up at ${page.url()}`);
+});
+// Mobile viewport
 test.use({ viewport: { width: 490, height: 896 } }),
   test("Mobile Visa refund with order in 24h ", async ({ page }) => {
     await page.goto("/");

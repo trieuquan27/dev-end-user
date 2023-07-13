@@ -3,34 +3,41 @@ import { randomEmail } from "../../common/randomemail";
 import { invalidString } from "../../common/Invalidstring";
 import { randomNum } from "../../common/RandomNumber";
 import { userName2 } from "../../common/AccountList";
+//test AfterEach
+test.afterEach(async ({ page }, testInfo) => {
+  console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
 
-test.use({ viewport: { width: 490, height: 896 } }),
-  test("A mixture of numbers and combination of uppercase and lowercase letters", async ({
-    page,
-  }) => {
-    test.setTimeout(10000);
-    await page.goto("/");
-    await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
-    await page.click("(//span[contains(@class,'flex items-center')])[3]");
-    await expect(page).toHaveURL("/signin");
-    await page.getByRole("link", { name: "Sign Up" }).click();
-    await page.waitForTimeout(3000);
-    await page.getByPlaceholder("Enter your email").fill(randomEmail);
-    // Get sign-up password fill
-    const enterPwd = page.getByPlaceholder("Enter your Password").first();
-    await enterPwd.fill(invalidString);
-    await page.getByPlaceholder("Re-Enter your Password").fill(invalidString);
-    await page.getByRole("button", { name: "Sign Up" }).click();
-    await expect(
-      page
-        .getByText(
-          "A mixture of numbers and combination of uppercase and lowercase letters"
-        )
-        .count()
-    ).toEqual[1];
-    await page.waitForTimeout(2000);
-    page.close();
-  });
+  if (testInfo.status !== testInfo.expectedStatus)
+    console.log(`Did not run as expected, ended up at ${page.url()}`);
+});
+// Mobile viewport
+test.use({ viewport: { width: 490, height: 896 } });
+test("A mixture of numbers and combination of uppercase and lowercase letters", async ({
+  page,
+}) => {
+  test.setTimeout(10000);
+  await page.goto("/");
+  await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
+  await page.click("(//span[contains(@class,'flex items-center')])[3]");
+  await expect(page).toHaveURL("/signin");
+  await page.getByRole("link", { name: "Sign Up" }).click();
+  await page.waitForTimeout(3000);
+  await page.getByPlaceholder("Enter your email").fill(randomEmail);
+  // Get sign-up password fill
+  const enterPwd = page.getByPlaceholder("Enter your Password").first();
+  await enterPwd.fill(invalidString);
+  await page.getByPlaceholder("Re-Enter your Password").fill(invalidString);
+  await page.getByRole("button", { name: "Sign Up" }).click();
+  await expect(
+    page
+      .getByText(
+        "A mixture of numbers and combination of uppercase and lowercase letters"
+      )
+      .count()
+  ).toEqual[1];
+  await page.waitForTimeout(2000);
+  page.close();
+});
 
 test("Password not match", async ({ page }) => {
   await page.goto("/");

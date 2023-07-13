@@ -6,6 +6,13 @@ import { randomLastName } from "../../common/randomname";
 import { userName3 } from "../../common/AccountList";
 import { credit } from "../../common/CreditCard";
 
+test.afterEach(async ({ page }, testInfo) => {
+  console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
+
+  if (testInfo.status !== testInfo.expectedStatus)
+    console.log(`Did not run as expected, ended up at ${page.url()}`);
+});
+
 test("view order detail after placing order successfully by visa", async ({
   browser,
 }) => {

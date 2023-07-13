@@ -7,6 +7,13 @@ import {
 import { credit } from "../../common/CreditCard";
 import { randomCVV, randomZipCode } from "../../common/RandomNumber";
 
+test.afterEach(async ({ page }, testInfo) => {
+  console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
+
+  if (testInfo.status !== testInfo.expectedStatus)
+    console.log(`Did not run as expected, ended up at ${page.url()}`);
+});
+
 test("Guest using visa", async ({ browser }) => {
   const context = await browser.newContext();
   test.setTimeout(60000);

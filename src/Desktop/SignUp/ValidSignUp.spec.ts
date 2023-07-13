@@ -3,6 +3,13 @@ import { randomEmail } from "../../common/randomemail";
 import { emailPwd } from "../../common/randompwd";
 import { userName } from "../../common/AccountList";
 
+test.afterEach(async ({ page }, testInfo) => {
+  console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
+
+  if (testInfo.status !== testInfo.expectedStatus)
+    console.log(`Did not run as expected, ended up at ${page.url()}`);
+});
+
 test("Valid Signup", async ({ page }) => {
   await page.goto("/");
   // for (let index = 0; index < 5; index++) {}

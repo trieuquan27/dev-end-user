@@ -1,5 +1,12 @@
 import { expect, test } from "@playwright/test";
 
+test.afterEach(async ({ page }, testInfo) => {
+  console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
+
+  if (testInfo.status !== testInfo.expectedStatus)
+    console.log(`Did not run as expected, ended up at ${page.url()}`);
+});
+
 test("Visa Refund", async ({ browser }) => {
   test.setTimeout(60000);
   const context = await browser.newContext();
