@@ -4,12 +4,7 @@ import { invalidString } from "../../common/Invalidstring";
 import { randomNum } from "../../common/RandomNumber";
 import { userName2 } from "../../common/AccountList";
 //test AfterEach
-test.afterEach(async ({ page }, testInfo) => {
-  console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
 
-  if (testInfo.status !== testInfo.expectedStatus)
-    console.log(`Did not run as expected, ended up at ${page.url()}`);
-});
 // Mobile viewport
 test.use({ viewport: { width: 490, height: 896 } });
 test("A mixture of numbers and combination of uppercase and lowercase letters", async ({

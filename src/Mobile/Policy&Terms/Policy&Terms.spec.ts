@@ -1,5 +1,7 @@
 import { test, expect } from "@playwright/test";
-
+// Mobile viewport
+test.use({ viewport: { width: 490, height: 896 } });
+// Test script
 test("Policy page", async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
