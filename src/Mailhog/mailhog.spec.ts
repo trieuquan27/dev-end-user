@@ -1,13 +1,23 @@
 import { test, expect } from "@playwright/test";
+//test AfterEach
+test.afterEach(async ({ page }, testInfo) => {
+  console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
 
-test.skip("mailhog", async ({ browser }) => {
-  const context = await browser.newContext();
+  if (testInfo.status !== testInfo.expectedStatus)
+    console.log(`Did not run as expected, ended up at ${page.url()}`);
+});
+// test script
+test("mailhog", async ({ browser }) => {
+  const context = await browser.newContext({
+    httpCredentials: {
+      username: "fastboy",
+      password: "ilovefastboy",
+    },
+  });
   const page = await context.newPage();
   await page.goto("https://deal.mailhog.fastboy.dev/");
-  await expect(page.getByRole("heading", { name: "Sign In" })).toBeVisible();
-  await page.getByPlaceholder("Username").fill("fastboy");
-  await page.getByPlaceholder("Password").fill("ilovefastboy");
-  const alert = page.locator(".alert-primary").first();
+  await expect(page).toHaveURL("https://deal.mailhog.fastboy.dev/");
+  await page.close();
   // const initialColor = await alert.evaluate((el) => {
   //   return getComputedStyle(el).fontSize;
   // });

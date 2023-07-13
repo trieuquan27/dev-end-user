@@ -27,9 +27,11 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: "https://dev.gocheckin.io",
-    //Credentials for HTTP authentication. If no origin is specified, the username and password are sent to any servers upon unauthorized responses.
+    //*Credentials for HTTP authentication. If no origin is specified, the username and password are sent to any servers upon unauthorized responses.
+    //*Full screen viewport.
     viewport: { width: 1920, height: 1080 },
-    // ignoreHTTPSErrors: true,
+    //*Ignore https error.
+    ignoreHTTPSErrors: true,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     // trace: "on-first-retry",
   },
