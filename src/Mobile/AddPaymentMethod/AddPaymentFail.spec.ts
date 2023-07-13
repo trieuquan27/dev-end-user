@@ -27,7 +27,6 @@ test("First name is required", async ({ browser }) => {
   //Navigate to Payment Method
   await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
   await page.click("//a[contains(text(),'Payment Method')]");
-  //   await page.click("(//p[text()='Payment Method'])[1]");
   await expect(page).toHaveURL(
     "https://dev.gocheckin.io/profile/payment-method"
   );
@@ -61,7 +60,6 @@ test("Last name is required", async ({ browser }) => {
   //Navigate to Payment Method
   await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
   await page.click("//a[contains(text(),'Payment Method')]");
-  //   await page.click("(//p[text()='Payment Method'])[1]");
   await expect(page).toHaveURL(
     "https://dev.gocheckin.io/profile/payment-method"
   );
@@ -95,7 +93,6 @@ test("CVV is required", async ({ browser }) => {
   //Navigate to Payment Method
   await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
   await page.click("//a[contains(text(),'Payment Method')]");
-  //   await page.click("(//p[text()='Payment Method'])[1]");
   await expect(page).toHaveURL(
     "https://dev.gocheckin.io/profile/payment-method"
   );
@@ -129,7 +126,6 @@ test("Card number is required", async ({ browser }) => {
   //Navigate to Payment Method
   await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
   await page.click("//a[contains(text(),'Payment Method')]");
-  //   await page.click("(//p[text()='Payment Method'])[1]");
   await expect(page).toHaveURL(
     "https://dev.gocheckin.io/profile/payment-method"
   );
@@ -163,7 +159,6 @@ test("Expire Date is required", async ({ browser }) => {
   //Navigate to Payment Method
   await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
   await page.click("//a[contains(text(),'Payment Method')]");
-  //   await page.click("(//p[text()='Payment Method'])[1]");
   await expect(page).toHaveURL(
     "https://dev.gocheckin.io/profile/payment-method"
   );
@@ -197,7 +192,6 @@ test("Zipcode is required", async ({ browser }) => {
   //Navigate to Payment Method
   await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
   await page.click("//a[contains(text(),'Payment Method')]");
-  //   await page.click("(//p[text()='Payment Method'])[1]");
   await expect(page).toHaveURL(
     "https://dev.gocheckin.io/profile/payment-method"
   );
@@ -231,7 +225,6 @@ test("Address is required", async ({ browser }) => {
   //Navigate to Payment Method
   await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
   await page.click("//a[contains(text(),'Payment Method')]");
-  //   await page.click("(//p[text()='Payment Method'])[1]");
   await expect(page).toHaveURL(
     "https://dev.gocheckin.io/profile/payment-method"
   );
@@ -265,7 +258,6 @@ test("Cancel", async ({ browser }) => {
   //Navigate to Payment Method
   await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
   await page.click("//a[contains(text(),'Payment Method')]");
-  //   await page.click("(//p[text()='Payment Method'])[1]");
   await expect(page).toHaveURL(
     "https://dev.gocheckin.io/profile/payment-method"
   );
