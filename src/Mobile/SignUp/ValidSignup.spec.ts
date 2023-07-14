@@ -27,6 +27,12 @@ test("Mobile Valid Signup", async ({ page }) => {
     )
     .click();
   await expect(enterPwd).toHaveAttribute("type", "text");
+  await page
+    .locator(
+      "(//span[contains(@class,'cursor-pointer text-neutral-tints')])[1]"
+    )
+    .click();
+  await expect(enterPwd).toHaveAttribute("type", "password");
   //re-enter password
   let reenterPwd = page.getByPlaceholder("Re-Enter your Password");
   await reenterPwd.fill(`${userName.Password}`);
@@ -42,5 +48,5 @@ test("Mobile Valid Signup", async ({ page }) => {
   await expect(
     page.getByRole("button", { name: "Resend Email" })
   ).toBeVisible();
-  // await page.close();
+  await page.close();
 });

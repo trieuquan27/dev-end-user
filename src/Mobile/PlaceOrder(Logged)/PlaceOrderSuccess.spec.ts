@@ -185,7 +185,7 @@ test("Mobile Place order by Master Card", async ({ page, context }) => {
   await expect(page).toHaveURL("/cart");
   await page
     .getByRole("button", { name: "Proceed To Checkout" })
-    .click({ delay: 500 });
+    .click({ delay: 600 });
   await expect(page).toHaveURL(/.*checkout/);
   await page.click("//button[text()='Add']");
   await page.fill('input[name="firstName"]', `${randomFirstName}`);
