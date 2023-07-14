@@ -14,6 +14,7 @@ test("Guest Fail", async ({ browser }) => {
   await expect(page).toHaveURL("/cart");
   await page.getByRole("button", { name: "Proceed To Checkout" }).click();
   await expect(page).toHaveURL(/.*checkout/);
+  //Add email
   await page.click("input[placeholder='Enter email']");
   await page.fill("input[placeholder='Enter email']", "d@a.com");
   await page.waitForTimeout(3000);
