@@ -22,10 +22,12 @@ test("First name is required", async ({ browser }) => {
   await page.fill('input[name="username"]', `${userName8.Name}`);
   await page.fill('input[name="password"]', `${userName8.Password}`);
   await page.getByRole("button", { name: "Sign In" }).click();
+  await page.waitForTimeout(2000);
   await expect(page).toHaveURL("/");
   //Navigate to Payment Method
   await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
   await page.click("//a[contains(text(),'Payment Method')]");
+  await page.waitForTimeout(2000);
   await expect(page).toHaveURL(
     "https://dev.gocheckin.io/profile/payment-method"
   );
@@ -55,10 +57,12 @@ test("Last name is required", async ({ browser }) => {
   await page.fill('input[name="username"]', `${userName8.Name}`);
   await page.fill('input[name="password"]', `${userName8.Password}`);
   await page.getByRole("button", { name: "Sign In" }).click();
+  await page.waitForTimeout(2000);
   await expect(page).toHaveURL("/");
   //Navigate to Payment Method
   await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
   await page.click("//a[contains(text(),'Payment Method')]");
+  await page.waitForTimeout(2000);
   await expect(page).toHaveURL(
     "https://dev.gocheckin.io/profile/payment-method"
   );
@@ -88,10 +92,12 @@ test("CVV is required", async ({ browser }) => {
   await page.fill('input[name="username"]', `${userName8.Name}`);
   await page.fill('input[name="password"]', `${userName8.Password}`);
   await page.getByRole("button", { name: "Sign In" }).click();
+  await page.waitForTimeout(2000);
   await expect(page).toHaveURL("/");
   //Navigate to Payment Method
   await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
   await page.click("//a[contains(text(),'Payment Method')]");
+  await page.waitForTimeout(2000);
   await expect(page).toHaveURL(
     "https://dev.gocheckin.io/profile/payment-method"
   );
@@ -121,10 +127,12 @@ test("Card number is required", async ({ browser }) => {
   await page.fill('input[name="username"]', `${userName8.Name}`);
   await page.fill('input[name="password"]', `${userName8.Password}`);
   await page.getByRole("button", { name: "Sign In" }).click();
+  await page.waitForTimeout(2000);
   await expect(page).toHaveURL("/");
   //Navigate to Payment Method
   await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
   await page.click("//a[contains(text(),'Payment Method')]");
+  await page.waitForTimeout(2000);
   await expect(page).toHaveURL(
     "https://dev.gocheckin.io/profile/payment-method"
   );
@@ -154,10 +162,12 @@ test("Expire Date is required", async ({ browser }) => {
   await page.fill('input[name="username"]', `${userName8.Name}`);
   await page.fill('input[name="password"]', `${userName8.Password}`);
   await page.getByRole("button", { name: "Sign In" }).click();
+  await page.waitForTimeout(2000);
   await expect(page).toHaveURL("/");
   //Navigate to Payment Method
   await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
   await page.click("//a[contains(text(),'Payment Method')]");
+  await page.waitForTimeout(2000);
   await expect(page).toHaveURL(
     "https://dev.gocheckin.io/profile/payment-method"
   );
@@ -187,10 +197,12 @@ test("Zipcode is required", async ({ browser }) => {
   await page.fill('input[name="username"]', `${userName8.Name}`);
   await page.fill('input[name="password"]', `${userName8.Password}`);
   await page.getByRole("button", { name: "Sign In" }).click();
+  await page.waitForTimeout(2000);
   await expect(page).toHaveURL("/");
   //Navigate to Payment Method
   await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
   await page.click("//a[contains(text(),'Payment Method')]");
+  await page.waitForTimeout(2000);
   await expect(page).toHaveURL(
     "https://dev.gocheckin.io/profile/payment-method"
   );
@@ -220,10 +232,12 @@ test("Address is required", async ({ browser }) => {
   await page.fill('input[name="username"]', `${userName8.Name}`);
   await page.fill('input[name="password"]', `${userName8.Password}`);
   await page.getByRole("button", { name: "Sign In" }).click();
+  await page.waitForTimeout(2000);
   await expect(page).toHaveURL("/");
   //Navigate to Payment Method
   await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
   await page.click("//a[contains(text(),'Payment Method')]");
+  await page.waitForTimeout(2000);
   await expect(page).toHaveURL(
     "https://dev.gocheckin.io/profile/payment-method"
   );
@@ -253,10 +267,12 @@ test("Cancel", async ({ browser }) => {
   await page.fill('input[name="username"]', `${userName8.Name}`);
   await page.fill('input[name="password"]', `${userName8.Password}`);
   await page.getByRole("button", { name: "Sign In" }).click();
+  await page.waitForTimeout(2000);
   await expect(page).toHaveURL("/");
   //Navigate to Payment Method
   await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
   await page.click("//a[contains(text(),'Payment Method')]");
+  await page.waitForTimeout(2000);
   await expect(page).toHaveURL(
     "https://dev.gocheckin.io/profile/payment-method"
   );
