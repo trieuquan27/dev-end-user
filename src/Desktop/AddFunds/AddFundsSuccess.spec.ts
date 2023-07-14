@@ -3,6 +3,7 @@ import { userName5 } from "../../common/AccountList";
 
 // test.use({viewport:{width:490,height:896}}),
 test("Add Funds Success", async ({ page }) => {
+  //Navigate to mainpage
   await page.goto("/");
   await page.getByRole("button").first().click();
   await expect(page).toHaveURL("/signin");
@@ -15,8 +16,8 @@ test("Add Funds Success", async ({ page }) => {
   await page.click("(//img[@class='mr-2'])[1]");
   await page.click("(//div[contains(@class,'w-full flex-none')]//button[1])");
   await page.fill("input", "10");
-  await page.click("//div[@class='flex items-center']");
-  await page.waitForTimeout(2000);
+  await page.getByRole("button", { name: "Add Funds" }).click({ delay: 200 });
+  await page.waitForTimeout(3000);
   await expect(page.getByText("Add funds successfully!")).toBeVisible();
   page.close();
 });

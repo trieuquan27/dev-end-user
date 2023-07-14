@@ -6,8 +6,8 @@ import {
   randomAddress,
 } from "../../common/randomname";
 import { credit } from "../../common/CreditCard";
-import { randomZipCode } from "../../common/randomnumber";
-import { randomCVV } from "../../common/randomnumber";
+import { randomZipCode } from "../../common/RandomNumber";
+import { randomCVV } from "../../common/RandomNumber";
 
 test("Add visa card", async ({ browser }) => {
   const context = await browser.newContext();

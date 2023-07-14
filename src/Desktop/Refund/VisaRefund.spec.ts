@@ -8,7 +8,6 @@ test.afterEach(async ({ page }, testInfo) => {
 });
 
 test("Visa Refund", async ({ browser }) => {
-  test.setTimeout(60000);
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto("/");

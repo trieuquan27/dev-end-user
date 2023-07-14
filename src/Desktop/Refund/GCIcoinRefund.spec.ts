@@ -2,7 +2,6 @@ import { expect, test } from "@playwright/test";
 import { userName } from "../../common/AccountList";
 
 test("GCI coin refund", async ({ page }) => {
-  test.setTimeout(60000);
   await page.goto("/");
   await page
     .locator("div")
