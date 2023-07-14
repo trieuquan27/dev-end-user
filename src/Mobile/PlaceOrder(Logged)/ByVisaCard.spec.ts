@@ -91,7 +91,7 @@ test("Mobile auto fill email when place order by JCB", async ({ browser }) => {
   await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
   await page.click("(//span[contains(@class,'flex items-center')])[3]");
   await expect(page).toHaveURL("/signin");
-  // await page.getByPlaceholder("Enter your email").fill("a@a88.com");
+  // a@a88.com
   await page.getByPlaceholder("Enter your email").fill(`${userName4.Name}`);
   await page
     .getByPlaceholder("Enter your password")
@@ -206,7 +206,6 @@ test("Mobile Place order by Master Card", async ({ page, context }) => {
   await expect(page.getByText("Receipt Details")).toBeVisible();
   page.close();
 });
-
 test("Mobile Place order by GCI coin", async ({ page }) => {
   await page.goto("/");
   await page.click("//*[name()='path' and contains(@fill-rule,'evenodd')]");
