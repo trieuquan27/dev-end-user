@@ -3,7 +3,7 @@ import {
   randomAddress,
   randomFirstName,
   randomLastName,
-} from "../../common/randomname";
+} from "../../common/RandomName";
 import { randomCVV, randomZipCode } from "../../common/RandomNumber";
 import { userName2 } from "../../common/AccountList";
 import { credit } from "../../common/CreditCard";
