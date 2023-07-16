@@ -4,10 +4,10 @@ import {
   randomFirstName,
   randomLastName,
   randomAddress,
-} from "../../common/randomname";
+} from "../../common/RandomName";
 import { credit } from "../../common/CreditCard";
-import { randomZipCode } from "../../common/randomnumber";
-import { randomCVV } from "../../common/randomnumber";
+import { randomZipCode } from "../../common/RandomNumber";
+import { randomCVV } from "../../common/RandomNumber";
 
 //Mobile viewport
 test.use({ viewport: { width: 490, height: 896 } });
