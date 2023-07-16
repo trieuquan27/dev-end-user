@@ -16,10 +16,19 @@
 // let randomDate2 = d;
 // console.log(randomDate2);
 
-function randomDate() {}
-const d = new Date();
-let date = d.getDate();
-let month = d.getMonth();
-let year = d.getFullYear();
-let toDay = ` ${month}` + "/" + `${year}`;
-console.log(toDay);
+// function randomDate() {}
+// const d = new Date();
+// let date = d.getDate();
+// let month = d.getMonth();
+// let year = d.getFullYear();
+// let toDay = ` ${month}` + "/" + `${year}`;
+// console.log(toDay);
+
+function getRandomDate(start, end) {
+  const minValue = start.getDate();
+  const maxValue = end.getDate();
+  //   const timestamp = Math.floor(Math.random() * (maxValue - minValue + 1));
+  return new Date();
+}
+
+console.log(getRandomDate(new Date(2023, 8), new Date(2035, 11)));

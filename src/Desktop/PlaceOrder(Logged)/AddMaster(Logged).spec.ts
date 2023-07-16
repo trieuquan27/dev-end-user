@@ -8,17 +8,9 @@ import { randomCVV, randomZipCode } from "../../common/RandomNumber";
 import { userName2 } from "../../common/AccountList";
 import { credit } from "../../common/CreditCard";
 
-test.afterEach(async ({ page }, testInfo) => {
-  console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
-
-  if (testInfo.status !== testInfo.expectedStatus)
-    console.log(`Did not run as expected, ended up at ${page.url()}`);
-});
-
 test("view order detail after placing order successfully by mastercard", async ({
   browser,
 }) => {
-  test.setTimeout(60000);
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto("/");

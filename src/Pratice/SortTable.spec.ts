@@ -1,5 +1,4 @@
 // const { test, expect } = require("@playwright/test");
-// const { Eyes, Target } = require("@applitools/eyes-playwright");
 
 // test.skip("Table", () => {
 //   test.beforeEach(async ({ page }) => {
