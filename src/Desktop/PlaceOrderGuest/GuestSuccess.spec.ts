@@ -99,7 +99,10 @@ test("Guest using master uncheck save money checkbox", async ({ browser }) => {
   await page.getByRole("button", { name: "Add Card" }).click();
   await page.waitForTimeout(3000);
   //Terms checkbox is checked
-  expect(page.getByRole("checkbox").nth(1).isChecked());
+  expect(page.getByRole("checkbox").nth(1)).toHaveAttribute(
+    "data-state",
+    "checked"
+  );
   await page.getByRole("button", { name: "Place Order" }).dblclick();
   expect(await page.getByText("Something went wrong").count()).toEqual(0);
   expect(
@@ -146,9 +149,11 @@ test("Guest using visa", async ({ browser }) => {
   await page.waitForTimeout(3000);
   await page.getByRole("button", { name: "Add Card" }).click();
   await page.waitForTimeout(5000);
-  //Check checkbox is checked
-  const checkBox = page.getByRole("button", { name: "checkbox" });
-  expect(checkBox.isChecked).toBeTruthy();
+  //Check term checkbox is checked
+  expect(page.getByRole("checkbox").nth(1)).toHaveAttribute(
+    "data-state",
+    "checked"
+  );
   await page.waitForTimeout(3000);
   await page.getByRole("button", { name: "Place Order" }).dblclick();
   expect(await page.getByText("Something went wrong").count()).toEqual(0);
@@ -198,9 +203,11 @@ test("Guest using american express", async ({ browser }) => {
   await page.waitForTimeout(3000);
   await page.getByRole("button", { name: "Add Card" }).click();
   await page.waitForTimeout(5000);
-  //Check checkbox is checked
-  const checkBox = page.getByRole("button", { name: "checkbox" });
-  expect(checkBox.isChecked).toBeTruthy();
+  // Check term checkbox is checked;
+  await expect(page.getByRole("checkbox")).toHaveAttribute(
+    "data-state",
+    "checked"
+  );
   await page.waitForTimeout(3000);
   await page.getByRole("button", { name: "Place Order" }).dblclick();
   expect(await page.getByText("Something went wrong").count()).toEqual(0);

@@ -1,11 +1,13 @@
 import { expect, test } from "@playwright/test";
 import { userName5 } from "../../common/AccountList";
-// test.use({viewport:{width:490,height:896}}),
-
-test("Add Funds Should more than zero", async ({ page }) => {
+//Before Each
+test.beforeEach(async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button").first().click();
   await expect(page).toHaveURL("/signin");
+});
+
+test("Add Funds Should more than zero", async ({ page }) => {
   // a@a68.com
   await page.fill('input[name="username"]', `${userName5.Name}`);
   await page.fill('input[name="password"]', `${userName5.Password}`);
@@ -20,9 +22,6 @@ test("Add Funds Should more than zero", async ({ page }) => {
 });
 
 test("Add Funds Must be a number", async ({ page }) => {
-  await page.goto("/");
-  await page.getByRole("button").first().click();
-  await expect(page).toHaveURL("/signin");
   // a@a68.com
   await page.fill('input[name="username"]', `${userName5.Name}`);
   await page.fill('input[name="password"]', `${userName5.Password}`);

@@ -8,5 +8,3 @@ function generate(length) {
 export var randomFirstName = generate(5);
 export var randomLastName = generate(4);
 export var randomAddress = generate(6);
-// console.log(randomFirstName);
-// console.log(randomLastName);
