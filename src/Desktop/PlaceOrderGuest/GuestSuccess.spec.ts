@@ -7,12 +7,17 @@ import {
 import { randomCVV, randomZipCode } from "../../common/RandomNumber";
 import { credit } from "../../common/CreditCard";
 
-test("Guest using master", async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  //Navigate to homepage
+//Before Each navigate to homepage
+test.beforeEach(async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveURL("/");
+});
+//After Each logout
+test.afterEach(async ({ page }) => {
+  page.close();
+});
+//Test scripts
+test("Guest using master", async ({ page }) => {
   //Buy Voucher
   await page.click("(//img[@class='object-cover'])[1]");
   await page.getByRole("button", { name: "Buy Now" }).dblclick();
@@ -59,16 +64,8 @@ test("Guest using master", async ({ browser }) => {
   await expect(page.getByPlaceholder("Enter your email")).toHaveValue(
     "d@v.com"
   );
-  page.close();
 });
-
-test("Guest using master uncheck save money checkbox", async ({ browser }) => {
-  const context = await browser.newContext();
-  test.setTimeout(60000);
-  const page = await context.newPage();
-  //Navigate to homepage
-  await page.goto("/");
-  await expect(page).toHaveURL("/");
+test("Guest using master uncheck save money checkbox", async ({ page }) => {
   //Buy Voucher
   await page.click("(//img[@class='object-cover'])[1]");
   await page.getByRole("button", { name: "Buy Now" }).dblclick();
@@ -120,13 +117,8 @@ test("Guest using master uncheck save money checkbox", async ({ browser }) => {
   await expect(page.getByPlaceholder("Enter your email")).toHaveValue(
     "d@v.com"
   );
-  page.close();
 });
-test("Guest using visa", async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  await page.goto("/");
-  await expect(page).toHaveURL("/");
+test("Guest using visa", async ({ page }) => {
   await page.click("(//img[@class='object-cover'])[1]");
   await page.getByRole("button", { name: "Buy Now" }).dblclick();
   await page.waitForTimeout(3000);
@@ -172,14 +164,8 @@ test("Guest using visa", async ({ browser }) => {
   await expect(page.getByPlaceholder("Enter your email")).toHaveValue(
     "v@v.com"
   );
-  page.close();
 });
-test("Guest using american express", async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  //Navigate to homepage
-  await page.goto("/");
-  await expect(page).toHaveURL("/");
+test("Guest using american express", async ({ page }) => {
   //Buy Voucher
   await page.click("(//img[@class='object-cover'])[1]");
   await page.getByRole("button", { name: "Buy Now" }).click();
@@ -204,11 +190,12 @@ test("Guest using american express", async ({ browser }) => {
   await page.getByRole("button", { name: "Add Card" }).click();
   await page.waitForTimeout(5000);
   // Check term checkbox is checked;
-  await expect(page.getByRole("checkbox")).toHaveAttribute(
+  await expect(page.getByRole("checkbox").nth(1)).toHaveAttribute(
     "data-state",
     "checked"
   );
   await page.waitForTimeout(3000);
+  //Place order
   await page.getByRole("button", { name: "Place Order" }).dblclick();
   expect(await page.getByText("Something went wrong").count()).toEqual(0);
   expect(
@@ -218,6 +205,7 @@ test("Guest using american express", async ({ browser }) => {
   ).toEqual(0);
   expect(await page.getByText("Cart Must have a payment.").count()).toEqual(0);
   await page.waitForTimeout(3000);
+  //Navigate to thank you page
   await expect(page).toHaveURL(/.*thank-you/);
   await expect(page).toHaveURL(/.*order/);
   await expect(page.getByText("Create Account")).toBeVisible();
@@ -225,5 +213,4 @@ test("Guest using american express", async ({ browser }) => {
   await expect(page.getByPlaceholder("Enter your email")).toHaveValue(
     "b@b.com"
   );
-  page.close();
 });
