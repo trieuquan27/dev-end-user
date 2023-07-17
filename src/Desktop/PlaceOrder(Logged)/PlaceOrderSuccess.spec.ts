@@ -24,7 +24,7 @@ test.afterEach(async ({ page }) => {
 });
 
 //Test scripts
-test("Place order successfully by mastercard", async ({ page }) => {
+test("Place order successfully by mastercard subcribed", async ({ page }) => {
   await page
     .locator("div")
     .filter({ hasText: /^HomeSell on Go Checkin DealsGet the AppSign In$/ })
@@ -63,7 +63,7 @@ test("Place order successfully by mastercard", async ({ page }) => {
   await page.getByRole("button", { name: "Add Card" }).click();
   await page.waitForTimeout(3000);
   // Check term checkbox is checked;
-  await expect(page.getByRole("checkbox")).toHaveAttribute(
+  await expect(page.getByRole("checkbox").nth(1)).toHaveAttribute(
     "data-state",
     "checked"
   );
@@ -84,7 +84,7 @@ test("Place order successfully by mastercard", async ({ page }) => {
   await expect(page).toHaveURL(/.*order/);
   await expect(page.getByText("Receipt Details")).toBeVisible();
 });
-test("Place order successfully by GCI coin", async ({ page }) => {
+test("Place order successfully by GCI coin subcribed", async ({ page }) => {
   await page
     .locator("div")
     .filter({ hasText: /^HomeSell on Go Checkin DealsGet the AppSign In$/ })
@@ -112,6 +112,7 @@ test("Place order successfully by GCI coin", async ({ page }) => {
     "value",
     `${userName.Name}`
   );
+
   // Check term checkbox is checked;
   await expect(page.getByRole("checkbox")).toHaveAttribute(
     "data-state",
@@ -136,7 +137,7 @@ test("Place order successfully by GCI coin", async ({ page }) => {
   await expect(page).toHaveURL(/.*order/);
   await expect(page.getByText("Receipt Details")).toBeVisible();
 });
-test("Place order successfully by visa", async ({ page }) => {
+test("Place order successfully by visa subcribed", async ({ page }) => {
   await page
     .locator("div")
     .filter({ hasText: /^HomeSell on Go Checkin DealsGet the AppSign In$/ })
@@ -199,7 +200,9 @@ test("Place order successfully by visa", async ({ page }) => {
   await expect(page).toHaveURL(/.*order/);
   await expect(page.getByText("Receipt Details")).toBeVisible();
 });
-test("Place order by JCB by auto fill email & saved card", async ({ page }) => {
+test("Place order by JCB by auto fill email & saved card subcribed", async ({
+  page,
+}) => {
   await page
     .locator("div")
     .filter({ hasText: /^HomeSell on Go Checkin DealsGet the AppSign In$/ })
@@ -247,6 +250,7 @@ test("Place order by JCB by auto fill email & saved card", async ({ page }) => {
     "data-state",
     "unchecked"
   );
+  // Open our term pop-up
   await expect(page.getByText("Our Terms")).toHaveClass(
     "cursor-pointer font-bold text-primary underline"
   );

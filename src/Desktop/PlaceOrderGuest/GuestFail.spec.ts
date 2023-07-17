@@ -7,12 +7,20 @@ import {
 } from "../../common/randomname";
 import { credit } from "../../common/CreditCard";
 import { randomCVV, randomZipCode } from "../../common/RandomNumber";
-test("Guest Please add card to process payment!", async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  //Navigate to mainpage
+
+//Before each navigate to dev.gocheckin.io
+test.beforeEach(async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveURL("/");
+});
+
+//After each logout
+test.afterEach(async ({ page }) => {
+  await page.close();
+});
+
+//Test scripts
+test("Guest Please add card to process payment!", async ({ page }) => {
   //Buy Voucher
   await page.click("(//img[@class='object-cover'])[1]");
   await page.getByRole("button", { name: "Buy Now" }).dblclick();
@@ -25,19 +33,14 @@ test("Guest Please add card to process payment!", async ({ browser }) => {
   await page.click("input[placeholder='Enter email']");
   await page.fill("input[placeholder='Enter email']", "d@a.com");
   await page.waitForTimeout(3000);
+  //Place order
   await page.getByRole("button", { name: "Place Order" }).dblclick();
   await expect(
     page.getByText("Please add card to process payment!")
   ).toBeVisible();
-  page.close();
 });
 
-test("Guest disagree terms", async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  //Navigate to homepage
-  await page.goto("/");
-  await expect(page).toHaveURL("/");
+test("Guest disagree terms", async ({ page }) => {
   //Buy Voucher
   await page.click("(//img[@class='object-cover'])[1]");
   await page.getByRole("button", { name: "Buy Now" }).dblclick();
@@ -55,13 +58,10 @@ test("Guest disagree terms", async ({ browser }) => {
     "data-state",
     "unchecked"
   );
+  //Place order
   await expect(page.locator("//span[text()='Place Order']")).toBeDisabled();
-  await page.waitForTimeout(1000);
-  await page.close();
 });
 test("Guest invalid email", async ({ page }) => {
-  await page.goto("/");
-  await expect(page).toHaveURL("/");
   await page.click("(//img[@class='object-cover'])[1]");
   await page.getByRole("button", { name: "Buy Now" }).click({ delay: 200 });
   await expect(page).toHaveURL("/cart");
@@ -81,10 +81,10 @@ test("Guest invalid email", async ({ page }) => {
   await page.waitForTimeout(3000);
   await page.click("//button[normalize-space()='Add Card']");
   await page.waitForTimeout(3000);
+  //Place order
   await page.getByRole("button", { name: "Place Order" }).click();
   await page.waitForTimeout(3000);
   await expect(
     page.getByText("This value is not a valid email address.")
   ).toBeVisible();
-  await page.close();
 });
