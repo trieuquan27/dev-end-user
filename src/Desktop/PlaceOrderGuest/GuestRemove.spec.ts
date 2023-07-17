@@ -1,10 +1,5 @@
 import { test, expect } from "@playwright/test";
-test.afterEach(async ({ page }, testInfo) => {
-  console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
 
-  if (testInfo.status !== testInfo.expectedStatus)
-    console.log(`Did not run as expected, ended up at ${page.url()}`);
-});
 test("Remove cart item", async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -17,6 +12,7 @@ test("Remove cart item", async ({ browser }) => {
   await page.waitForTimeout(3000);
   //Add cart item
   await expect(page).toHaveURL("/cart");
+  //Remove cart item
   await page.getByText("Remove").dblclick();
   await expect(
     page.getByText("Please add deals to your shopping cart")
