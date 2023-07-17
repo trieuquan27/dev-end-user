@@ -63,7 +63,7 @@ test("Place order successfully by mastercard subcribed", async ({ page }) => {
   await page.getByRole("button", { name: "Add Card" }).click();
   await page.waitForTimeout(3000);
   // Check term checkbox is checked;
-  await expect(page.getByRole("checkbox").nth(1)).toHaveAttribute(
+  await expect(page.getByRole("checkbox")).toHaveAttribute(
     "data-state",
     "checked"
   );
@@ -200,9 +200,7 @@ test("Place order successfully by visa subcribed", async ({ page }) => {
   await expect(page).toHaveURL(/.*order/);
   await expect(page.getByText("Receipt Details")).toBeVisible();
 });
-test("Place order by JCB by auto fill email & saved card subcribed", async ({
-  page,
-}) => {
+test("Place order by JCB saved card subcribed", async ({ page }) => {
   await page
     .locator("div")
     .filter({ hasText: /^HomeSell on Go Checkin DealsGet the AppSign In$/ })

@@ -1,14 +1,27 @@
 import { test, expect } from "@playwright/test";
 
-test("Policy page", async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
+//Before each navigate to dev.gocheckin.io
+test.beforeEach(async ({ page }) => {
   await page.goto("/");
+});
+
+//After each close
+test.afterEach(async ({ page }) => {
+  page.close();
+});
+
+//Test scripts
+test("Policy page", async ({ page }) => {
   await page.click("//a[normalize-space()='Privacy Policy']");
   await expect(page).toHaveURL("https://dev.gocheckin.io/privacy-policy");
   await expect(
     page.locator("div").filter({ hasText: /^Privacy Policy$/ })
   ).toBeVisible();
+  // Check Terms of Use top
+  let termsofUseTop = page.getByRole("link", { name: "Terms of Use." });
+  await expect(termsofUseTop).toHaveAttribute("href", "/terms-of-use");
+  await termsofUseTop.click({ trial: true });
+
   // 1. Types of Information
   await page.locator("//div[@id='1']").click();
   await page.waitForTimeout(2000);
@@ -21,12 +34,35 @@ test("Policy page", async ({ browser }) => {
   await expect(page.locator("//div[@id='2']")).toHaveText(
     "2. How GoCheckIn Deals Collects InformationWe may collect personal information about you from a variety of sources, including:From you: We collect information that you submit to us. For example, when you use the Service; make a purchase; register to receive information, products, or services available through the Service; or interact with us in other ways. We will collect any information you voluntarily provide, and we may also request optional information to support your use of the Service. We also collect any information that you voluntarily enter into any postings, comments, or forums within the Service. If you send an email to us, we will collect your email address and the full content of your email, including attached files and other information you choose to provide to us.From your device: When you use the Service, we may collect information about the devices you use to access the Service, including hardware model, operating system and version, Internet Protocol (“IP”) address, and other unique device identifiers, mobile network information, and information about the device’s interaction with our Service. We also collect information about how you use our Service, including your access times, browser types, and language. This type of data enables us to understand how often individuals use parts of the Service so we can analyze and improve it. To collect this information, we use cookies and web beacons, and other similar technologies. To learn more about how we automatically receive and record information when you interact with the Service, please review our Cookies Policy. Cookies Policy. Note that this Privacy Notice covers only how we use information collected via cookies; it does not cover the use of such information by third parties.Location information: We may collect different types of information about your location, including general information, such as the city, state, and/or zip code associated with your IP Address, and, if you agree, more specific location information that is provided through the GPS functionality on mobile devices used to access the Service. We may use such location information to customize the Service, including advertising that is presented to you. In order to do this, your location information may be passed along to our affiliates, agents, vendors or advertisers. You may be able to disallow our use of certain location data through your device or browser settings, for example, by disabling “Location” services for the GoCheckIn Deals application in iOS privacy settings.Social media networks and other third parties: We may obtain information about you or your use of the Service from third party sources, such as our vendors, like web hosting providers, analytics providers, or advertisers. You may give us permission to access your information from services offered by third parties, including social media networks. The information we obtain from third party services depends on your account/privacy settings with those third parties and the third parties’ privacy policies, so be sure to check those policies and to adjust your settings to meet your preferences. When you access the Service through social media networks and other third party platforms, you are authorizing GoCheckIn Deals to collect, store, and use such information and content in accordance with this Privacy Notice. Please keep in mind that any information provided to us by a third party may also be subject to that third party’s privacy policy."
   );
+  //Check Cookie Policy 2
+  let cookieLink2 = page
+    .getByRole("region", { name: "How GoCheckIn Deals Collects Information" })
+    .getByRole("link", { name: "Cookies Policy" });
+  await expect(cookieLink2).toHaveAttribute("href", "/cookies-policy");
+  await cookieLink2.click({ trial: true });
+
   //3. How GoCheckIn Deals Uses Information
   await page.locator("//div[@id='3']").click();
   await page.waitForTimeout(2000);
   await expect(page.locator("//div[@id='3']")).toHaveText(
     "3. How GoCheckIn Deals Uses InformationWe may use information collected as described in this Privacy Notice to:Operate, maintain, and improve the Service and other programs, features, and functionality related to the Service;Provide you with interest-based ads, push notifications, communications, and offers for products and services from us and our business partners, including based on your precise geolocation;Facilitate and fulfill orders – for example, for GoCheckIn Deals vouchers and other services, including tracking redemption;Process and confirm bookings with our partners;Process your payments;Evaluate your eligibility for certain types of offers, products, or services that may be of interest to you, and analyze advertising effectiveness;Answer your questions and respond to your requests;Pertorm analytics and conduct customer research;Communicate and provide additional information that may be of interest to you about GoCheckIn Deals and our business partners, sometimes by combining your information with information we obtain from other sources;Send you reminders, technical notices, updates, security alerts, support and administrative messages, service bulletins, marketing messages, and requested information, including on behalf of our business partners;Administer rewards, surveys, sweepstakes, contests, or other promotional activities or events sponsored by us or our business partners;Manage our everyday business needs, such as administration of the Service, forum management, fulfillment, analytics, fraud prevention, and enforcement of our corporate reporting obligations and Terms of Use, or to comply with the law; or to comply with the law;Allow you to apply for a job, post a video, or sign up for special offers from merchants, our business partners, or other companies;Verify your requests made pursuant to this Privacy Notice;Enhance other information we have about you to help us better understand you and determine your interests,Use your data as described in our Card Linked Deals program, if you consented to participate in such program; andWe also may use information collected as described in this Privacy Notice with your consent or as otherwise required or permitted by law.GoCheckin Deals uses your geolocation, including your preciseGoCheckIn Deals uses your geolocation, including your precise geolocation, consistent with this Privacy Notice as described in Section 2 above to deliver location-based offers, products or services that may be of interest to you.If you make purchases without creating a password, we link these purchases to your exmail address and create a secure account in our system. If you create a password at a later date, you will be able to view past purchases made with that email address.If you use any features on the Service to send information about a product or service to another person, we will also collect the personal information of that other person to the extent disclosed by you and may contact them using the information you provided us."
   );
+  //Check terms of use 3
+  let termsOfUse3 = page
+    .getByRole("region", {
+      name: "How GoCheckIn Deals Uses Information",
+    })
+    .getByRole("link", { name: "Terms of Use," });
+  await termsOfUse3.click({ trial: true });
+  await expect(termsOfUse3).toHaveAttribute("href", "/terms-of-use");
+  //Check Section 2 span
+  let section2 = page.locator("//span[text()='Section 2']");
+  await expect(section2).toHaveText("Section 2");
+  await section2.click();
+  await expect(
+    page.getByText("2. How GoCheckIn Deals Collects Information")
+  ).toBeVisible();
+
   //4. When and Why GoCheckIn Deals Discloses Information
   await page.locator("//div[@id='4']").click();
   await page.waitForTimeout(2000);
@@ -39,30 +75,89 @@ test("Policy page", async ({ browser }) => {
   await expect(page.locator("//div[@id='5']")).toHaveText(
     "5. Security of Personal InformationGoCheckIn Deals has implemented an information security program that contains administrative, technical, and physical controls that are designed to reasonably safeguard personal information. For example, we use industry-standard encryption technology to secure financial account information. No method of transmission over the Internet, or method of electronic storage, is 100% secure, however. Therefore, we cannot guarantee its absolute security. If you have any questions about security on our Website, you can contact us at privacy@gocheckindeals.io. "
   );
+  let mailLink5 = page
+    .getByRole("region", { name: "5. Security of Personal Information" })
+    .getByRole("link", { name: "privacy@gocheckindeals.io." });
+  await mailLink5.click({ trial: true });
+  await expect(mailLink5).toHaveAttribute(
+    "href",
+    "mailto: privacy@gocheckindeals.io "
+  );
   //6. Retention of Personal Data
   await page.locator("//div[@id='6']").click();
   await page.waitForTimeout(2000);
   await expect(page.locator("//div[@id='6']")).toHaveText(
     "6. Retention of Personal DataWe will retain your personal data for as long as your account is active or as needed to provide you services. If you close your account, we will retain your personal data for a period where it is necessary to continue operating our business effectively, to maintain a record of your transactions for financial reporting purposes or fraud prevention purposes until these purposes no longer exist, and to retain as necessary to comply with our legal obligations, resolve disputes, and enforce our agreements."
   );
+
   //7. Your Rights Regarding Personal Information
   await page.locator("//div[@id='7']").click();
   await page.waitForTimeout(2000);
   await expect(page.locator("//div[@id='7']")).toHaveText(
     "7. Your Rights Regarding Personal Information You have certain rights with regard to your personal information:You have the right to know and request information about the categories and specific pieces of personal information we have collected about you within the last 12 months, as well as the categories of sources from which such information is collected, the purpose for collecting such information, and the categories of third parties with whom we share such information. You also have the right to know if we have sold or disclosed your personal information for business purposes. You have the right to update your personal information You have the right to request a portable copy of your personal information.You have the right to request that GoCheckIn Deals delete your personal information, subject to certain exceptions allowed under applicable law.You have the right to opt-out of certain disclosures of your personal information for valuable consideration. You can exercise this right through our “Do Not Sell My Personal Information” tool.You have the right to not be discriminated against for exercising any of the above-listed rights. We may, however, provide a different level of service or charge a different rate reasonably relating to the value of your personal information.You may exercise these rights through the GoCheckIn Deals Data Privacy Portal or by sending an email to privacy@gocheckindeals.io. We may take reasonable steps to verify your identity prior to responding to your requests. If you are a consumer under the California Consumer Privacy Act (“CCPA”) and wish to contact us through an authorized agent, the authorized agent can submit a request on your behalf at privacy@gocheckindeals.io. along with a notice signed by you certifying that the agent is authorized to act on your behalf. We may take reasonable steps to verify your identity, including but not limited to verification of your email, prior to responding to your requests.In addition to the above rights, you can update or remove financial account information. You can also deactivate your GoCheckIn Deals account."
   );
+  //Check Do Not Sell My Personal Information
+  let doNotSellMyInfo = page.locator(
+    "//span[text()='Do Not Sell My Personal Information']"
+  );
+  await expect(doNotSellMyInfo).toHaveText(
+    "Do Not Sell My Personal Information"
+  );
+  await doNotSellMyInfo.click();
+  //Check Do Not Sell My Personal Information dialog
+  await expect(
+    page.getByRole("dialog", {
+      name: "Do Not Sell or Share My Personal Information",
+    })
+  ).toBeVisible();
+  await page
+    .getByRole("dialog", {
+      name: "Do Not Sell or Share My Personal Information",
+    })
+    .locator("svg")
+    .click();
+  //Check Data Privacy Portal
+  await page.getByText("Data Privacy Portal").click({ trial: true });
+  //Check maillink7
+  let mailLink7 = page
+    .getByRole("region", {
+      name: "7. Your Rights Regarding Personal Information",
+    })
+    .getByRole("link", { name: "privacy@gocheckindeals.io." });
+  await mailLink7.click({ trial: true });
+  await expect(mailLink7).toHaveAttribute(
+    "href",
+    "mailto: privacy@gocheckindeals.io "
+  );
+
   //8. Your Choices
   await page.locator("//div[@id='8']").click();
   await page.waitForTimeout(2000);
   await expect(page.locator("//div[@id='8']")).toHaveText(
     "8. Your ChoicesWe think that you benefit from a more personalized experience when we know more about you and what you like. However, you can limit the information you provide to GoCheckIn Deals, and you can limit the communications that GoCheckIn Deals sends to you. In particular:Commercial Emails: You may choose not to receive commercial e-mails from us by following the instructions contained in any of the commercial e-mails we send or by logging into your account and adjusting your email preferences. Please note that even if you unsubscribe from commercial email messages, we may still email you non-commercial emails related to your account and your transactions on the Service. You may update your subscription preferences at any time.Cookies and Other Technologies: You may manage how your browser handles cookies by adjusting its privacy and security settings. Browsers are different, so refer to instructions related to your browser to learn about cookie-related and other privacy and security settings that may be available.Currently, we do not alter our data collection and use practices in response to Do Not Track signals.We use internet and network activity information and device data to directly serve you interest-based ads on third party websites and mobile applications. Interest-based ads served directly by GoCheckIn Deals on third party sites will display the AdChoices icon. If you prefer not to receive interest-based ads from GoCheckIn Deals on third party sites, you can click on the AdChoices icon in the ad, which will direct you to the GoCheckIn Deals page where you can opt-out of receiving interest-based ads served by GoCheckIn Deals.Fastboy Group, LLC. is a member of the Digital Advertising Alliance, which is a media marketing and trade association that has issued self-regulatory guidelines for online advertising. Visit the DAA’s AdChoices page to learn more about interest-based advertising and to opt-out of having cookies placed by ad-serving companies.Device Data: You may manage how your mobile device and mobile browser share certain device data with GoCheckIn Deals, as well as how your mobile browser handles cookies by adjusting the privacy and security settings on your mobile device. Please refer to the instructions provided by your mobile service provider or the manufacturer of your device to learn how to adjust your settings.When you first visit or use the Service we may request permission to collect and use your device’s precise geolocation. You can opt not to permit the collection of this information, or permit it only when using the mobile app, but it may limit certain functions or features of the Service. You can control how and whether we collect your precise geolocation information through your device’s settings.Emails from Business Partners: If you wish to opt-out of receiving offers directly from our business partners, you can follow the opt-out instructions in the emails they send you."
   );
+  //Check AdChoices Page link
+  let adChoicesPage = page.getByRole("link", { name: "AdChoices page" });
+  await expect(adChoicesPage).toHaveAttribute(
+    "href",
+    "https://youradchoices.com/"
+  );
+  await adChoicesPage.click({ trial: true });
+
   //9. Social Community Areas
   await page.locator("//div[@id='9']").click();
   await page.waitForTimeout(2000);
   await expect(page.locator("//div[@id='9']")).toHaveText(
     "9. Social Community AreasThe Service may be accessible through or contain connections to areas where you may be able to publicly post information, communicate with others such as discussion boards or blogs, review products and merchants, and submit media content. Prior to posting in these areas, please read our Terms of Use carefully. All the information you post may be accessible to anyone with Internet access, and any personal information you include in your posting may be read, collected, and used by others. We recommend that you do not post any personal information in the social community areas."
   );
+  //Check Terms of Use link
+  let termsofUse9 = page.getByRole("link", {
+    name: "Terms of Use",
+    exact: true,
+  });
+  await expect(termsofUse9).toHaveAttribute("href", "/terms-of-use");
+  await termsofUse9.click({ trial: true });
+
   //10. Privacy Practices of Third Parties
   await page.locator("//div[@id='10']").click();
   await page.waitForTimeout(2000);
@@ -101,13 +196,9 @@ test("Policy page", async ({ browser }) => {
     "href",
     "mailto: privacy@gocheckindeals.io "
   );
-  page.close();
 });
 
-test("Terms of use page", async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  await page.goto("/");
+test("Terms of use page", async ({ page }) => {
   await page.click("//a[contains(text(),'Term of Use')]");
   await expect(page).toHaveURL("https://dev.gocheckin.io/terms-of-use");
   await expect(
@@ -272,6 +363,4 @@ test("Terms of use page", async ({ browser }) => {
   await expect(page.locator("id=24")).toHaveText(
     "24. Additional DisclosuresNo waiver by either you or GoCheckIn Deals of any breach or default or failure to exercise any right allowed under these Terms of Use is a waiver of any preceding or subsequent breach or default or a waiver or forfeiture of any similar or future rights under our Terms of Use. The section headings used herein are for convenience only and shall be of no legal force or effect. If a court of competent jurisdiction holds any provision of our Terms of Use invalid, such invalidity shall not affect the enforceability of any other provisions contained in these Terms of Use, and the remaining portions of our Terms of Use shall continue in full force and effect.You are contracting with Fastboy Group LLC,.. Correspondence should be directed to: FASTBOY GROUP LLC., 11011 Richmond Ave., Houston, Texas, 77042 or by telephone at (832) 968 6668The provisions of these Terms of Use apply equally to, and are for the benefit of, GoCheckIn Deals , its subsidiaries, affiliates, Merchants, and its third-party content providers and licensors, and each shall have the right to assert and enforce such provisions directly."
   );
-
-  page.close();
 });

@@ -4,7 +4,7 @@ import {
   randomFirstName,
   randomLastName,
   randomAddress,
-} from "../../common/RandomName";
+} from "../../common/randomname";
 import { credit } from "../../common/CreditCard";
 import { randomZipCode } from "../../common/RandomNumber";
 import { randomCVV } from "../../common/RandomNumber";
